@@ -1,0 +1,104 @@
+<!-- Use this file to deploy some handlers/chains and services      -->
+<!-- Two ways to do this:                                           -->
+<!--   java org.apache.axis.client.AdminClient deploy.wsdd          -->
+<!--      after the axis server is running                          -->
+<!-- or                                                             -->
+<!--   java org.apache.axis.utils.Admin client|server deploy.wsdd   -->
+<!--      from the same directory that the Axis engine runs         -->
+
+<deployment
+    xmlns="http://xml.apache.org/axis/wsdd/"
+    xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">
+
+  <!-- Services from BuyServiceService WSDL service -->
+
+  <service name="BuyService" provider="java:RPC" style="wrapped" use="literal">
+      <parameter name="wsdlTargetNamespace" value="http://entity"/>
+      <parameter name="wsdlServiceElement" value="BuyServiceService"/>
+      <parameter name="schemaQualified" value="http://entity"/>
+      <parameter name="wsdlServicePort" value="BuyService"/>
+      <parameter name="className" value="entity.BuyServiceSoapBindingImpl"/>
+      <parameter name="wsdlPortType" value="BuyService"/>
+      <parameter name="typeMappingVersion" value="1.2"/>
+      <operation name="convert" qname="operNS:convert" xmlns:operNS="http://entity" returnQName="retNS:convertReturn" xmlns:retNS="http://entity" returnType="rtns:double" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+        <parameter qname="pns:montant" xmlns:pns="http://entity" type="tns:double" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:currency" xmlns:pns="http://entity" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <operation name="withdrawal" qname="operNS:withdrawal" xmlns:operNS="http://entity" returnQName="retNS:withdrawalReturn" xmlns:retNS="http://entity" returnType="rtns:boolean" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+        <parameter qname="pns:customerId" xmlns:pns="http://entity" type="tns:int" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:amount" xmlns:pns="http://entity" type="tns:double" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <operation name="deposit" qname="operNS:deposit" xmlns:operNS="http://entity" soapAction="" >
+        <parameter qname="pns:customerId" xmlns:pns="http://entity" type="tns:int" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:amount" xmlns:pns="http://entity" type="tns:double" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <operation name="createBankAccount" qname="operNS:createBankAccount" xmlns:operNS="http://entity" soapAction="" >
+        <parameter qname="pns:customerId" xmlns:pns="http://entity" type="tns:int" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <operation name="getFeedBackByProduct" qname="operNS:getFeedBackByProduct" xmlns:operNS="http://entity" returnQName="retNS:getFeedBackByProductReturn" xmlns:retNS="http://entity" returnType="rtns:FeedBack" xmlns:rtns="http://entity" soapAction="" >
+        <parameter qname="pns:productId" xmlns:pns="http://entity" type="tns:int" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <operation name="removeProductFromCart" qname="operNS:removeProductFromCart" xmlns:operNS="http://entity" soapAction="" >
+        <parameter qname="pns:customerId" xmlns:pns="http://entity" type="tns:int" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:productId" xmlns:pns="http://entity" type="tns:int" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <operation name="buy" qname="operNS:buy" xmlns:operNS="http://entity" returnQName="retNS:buyReturn" xmlns:retNS="http://entity" returnType="rtns:boolean" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+        <parameter qname="pns:customerId" xmlns:pns="http://entity" type="tns:int" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <operation name="getNameEmployee" qname="operNS:getNameEmployee" xmlns:operNS="http://entity" returnQName="retNS:getNameEmployeeReturn" xmlns:retNS="http://entity" returnType="rtns:string" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+        <parameter qname="pns:id" xmlns:pns="http://entity" type="tns:int" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <operation name="addProductToCart" qname="operNS:addProductToCart" xmlns:operNS="http://entity" soapAction="" >
+        <parameter qname="pns:customerId" xmlns:pns="http://entity" type="tns:int" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:productId" xmlns:pns="http://entity" type="tns:int" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <operation name="getProductList" qname="operNS:getProductList" xmlns:operNS="http://entity" returnQName="retNS:getProductListReturn" xmlns:retNS="http://entity" returnType="rtns:Product" xmlns:rtns="http://entity" soapAction="" >
+      </operation>
+      <operation name="loginCustomer" qname="operNS:loginCustomer" xmlns:operNS="http://entity" returnQName="retNS:loginCustomerReturn" xmlns:retNS="http://entity" returnType="rtns:Customer" xmlns:rtns="http://entity" soapAction="" >
+        <parameter qname="pns:login" xmlns:pns="http://entity" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:password" xmlns:pns="http://entity" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <operation name="addCustomer" qname="operNS:addCustomer" xmlns:operNS="http://entity" returnQName="retNS:addCustomerReturn" xmlns:retNS="http://entity" returnType="rtns:Customer" xmlns:rtns="http://entity" soapAction="" >
+        <parameter qname="pns:firstName" xmlns:pns="http://entity" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:lastName" xmlns:pns="http://entity" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:email" xmlns:pns="http://entity" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:login" xmlns:pns="http://entity" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:password" xmlns:pns="http://entity" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <operation name="getAllCurencies" qname="operNS:getAllCurencies" xmlns:operNS="http://entity" returnQName="retNS:getAllCurenciesReturn" xmlns:retNS="http://entity" returnType="rtns:string" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+      </operation>
+      <parameter name="allowedMethods" value="removeProductFromCart createBankAccount buy getFeedBackByProduct convert withdrawal addProductToCart addCustomer loginCustomer deposit getAllCurencies getProductList getNameEmployee"/>
+
+      <typeMapping
+        xmlns:ns="http://entity"
+        qname="ns:Customer"
+        type="java:entity.Customer"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://entity"
+        qname="ns:Product"
+        type="java:entity.Product"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <arrayMapping
+        xmlns:ns="http://entity"
+        qname="ns:ArrayOfProduct"
+        type="java:entity.Product[]"
+        innerType="cmp-ns:Product" xmlns:cmp-ns="http://entity"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://entity"
+        qname="ns:FeedBack"
+        type="java:entity.FeedBack"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+  </service>
+</deployment>
