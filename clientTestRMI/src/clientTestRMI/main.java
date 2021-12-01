@@ -21,14 +21,14 @@ public class main {
 		purshaseService = (IPurshaseController) Naming.lookup("rmi://localhost:1099/purshaseService");
 		employeeService = (IEmployeeController) Naming.lookup("rmi://localhost:1100/employeeService");
 		feedBack = (IFeedbackController) Naming.lookup("rmi://localhost:1099/feedBack");
-		IEmployee emp1= employeeService.addEmployee("Ilhem", "Aissaoui", "ei_aissaoui@esi.dz", "5 impasse honore de balzac", "Ilhem23", "Ilhem23");
-		IEmployee emp2= employeeService.addEmployee("Dounia", "Ksiaa", "donia.ksiaa@esprit.tn ", "5 torcy", "dounia23", "dounia23");
-		IEmployee emp3= employeeService.addEmployee("Billel", "diab", "billel.2545@gmail.com", "5 noisey le grand", "billel23", "billel23");
-		IEmployee emp4= employeeService.addEmployee("ghada", "benfliss", "ghada5@gmail.com", "5 noisey le grand", "ghada23", "ghada23");
+		Employee emp1= employeeService.searchEmployeeById(1);
+		Employee emp2= employeeService.searchEmployeeById(2);
+		Employee emp3= employeeService.searchEmployeeById(3);
+		Employee emp4= employeeService.searchEmployeeById(4);
 		
-		int id = productService.addProduct("tshirt1", "pull", "clothes", true, "tshirt.jpg", 12, "red", "good");
-		int id2 = productService.addProduct("tshirt2", "pull", "clothes", true, "tshirt.jpg", 2, "red", "good");
-		int id3 = productService.addProduct("tshirt3", "pull", "clothes", true, "tshirt.jpg", 13, "red", "good");
+		int id = productService.addProduct("tshirt1",  "clothes", true, "tshirt.jpg", 12, "good");
+		int id2 = productService.addProduct("tshirt2",  "clothes", true, "tshirt.jpg", 2, "good");
+		int id3 = productService.addProduct("tshirt3",  "clothes", true, "tshirt.jpg", 13, "good");
 		
 		System.out.println("id of product 1 " + productService.searchById(id).getId());
 		System.out.println("id of product 2 " + productService.searchById(id2).getId());
@@ -82,6 +82,13 @@ public class main {
 		{
 			System.out.println("the product is not available for employee "+emp4.getId()+", you will be notify when the product is available");
 		}
+		
+		IRequestObserver request1= employeeService.addRequest(saleId2.getProductId(), emp3.getId());
+		IRequestObserver request2= employeeService.addRequest(saleId2.getProductId(), emp4.getId());
+		
+		productService.searchByIdObserved(saleId2.getProductId()).subscribe(request1);
+		productService.searchByIdObserved(saleId2.getProductId()).subscribe(request2);
+		
 		feedBack.addFeedBack(saleService.getSaleById(pursh2.getIdSale()).getProductId(), pursh2.getEmployeeId(), 5, "good quality");
 		int ip= saleService.getSaleById(pursh2.getIdSale()).getProductId();
 		for(IFeedBack f: feedBack.searchByProduct(ip)) {

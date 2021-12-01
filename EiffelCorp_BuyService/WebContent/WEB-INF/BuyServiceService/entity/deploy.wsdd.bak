@@ -24,14 +24,6 @@
         <parameter qname="pns:montant" xmlns:pns="http://entity" type="tns:double" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
         <parameter qname="pns:currency" xmlns:pns="http://entity" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
       </operation>
-      <operation name="withdrawal" qname="operNS:withdrawal" xmlns:operNS="http://entity" returnQName="retNS:withdrawalReturn" xmlns:retNS="http://entity" returnType="rtns:boolean" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
-        <parameter qname="pns:customerId" xmlns:pns="http://entity" type="tns:int" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
-        <parameter qname="pns:amount" xmlns:pns="http://entity" type="tns:double" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
-      </operation>
-      <operation name="deposit" qname="operNS:deposit" xmlns:operNS="http://entity" soapAction="" >
-        <parameter qname="pns:customerId" xmlns:pns="http://entity" type="tns:int" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
-        <parameter qname="pns:amount" xmlns:pns="http://entity" type="tns:double" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
-      </operation>
       <operation name="createBankAccount" qname="operNS:createBankAccount" xmlns:operNS="http://entity" soapAction="" >
         <parameter qname="pns:customerId" xmlns:pns="http://entity" type="tns:int" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
       </operation>
@@ -42,21 +34,9 @@
         <parameter qname="pns:customerId" xmlns:pns="http://entity" type="tns:int" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
         <parameter qname="pns:productId" xmlns:pns="http://entity" type="tns:int" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
       </operation>
-      <operation name="buy" qname="operNS:buy" xmlns:operNS="http://entity" returnQName="retNS:buyReturn" xmlns:retNS="http://entity" returnType="rtns:boolean" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
-        <parameter qname="pns:customerId" xmlns:pns="http://entity" type="tns:int" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
-      </operation>
-      <operation name="getNameEmployee" qname="operNS:getNameEmployee" xmlns:operNS="http://entity" returnQName="retNS:getNameEmployeeReturn" xmlns:retNS="http://entity" returnType="rtns:string" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
-        <parameter qname="pns:id" xmlns:pns="http://entity" type="tns:int" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
-      </operation>
-      <operation name="addProductToCart" qname="operNS:addProductToCart" xmlns:operNS="http://entity" soapAction="" >
-        <parameter qname="pns:customerId" xmlns:pns="http://entity" type="tns:int" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
-        <parameter qname="pns:productId" xmlns:pns="http://entity" type="tns:int" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
-      </operation>
       <operation name="getProductList" qname="operNS:getProductList" xmlns:operNS="http://entity" returnQName="retNS:getProductListReturn" xmlns:retNS="http://entity" returnType="rtns:Product" xmlns:rtns="http://entity" soapAction="" >
       </operation>
-      <operation name="loginCustomer" qname="operNS:loginCustomer" xmlns:operNS="http://entity" returnQName="retNS:loginCustomerReturn" xmlns:retNS="http://entity" returnType="rtns:Customer" xmlns:rtns="http://entity" soapAction="" >
-        <parameter qname="pns:login" xmlns:pns="http://entity" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
-        <parameter qname="pns:password" xmlns:pns="http://entity" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      <operation name="getAllCurencies" qname="operNS:getAllCurencies" xmlns:operNS="http://entity" returnQName="retNS:getAllCurenciesReturn" xmlns:retNS="http://entity" returnType="rtns:string" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
       </operation>
       <operation name="addCustomer" qname="operNS:addCustomer" xmlns:operNS="http://entity" returnQName="retNS:addCustomerReturn" xmlns:retNS="http://entity" returnType="rtns:Customer" xmlns:rtns="http://entity" soapAction="" >
         <parameter qname="pns:firstName" xmlns:pns="http://entity" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
@@ -65,7 +45,27 @@
         <parameter qname="pns:login" xmlns:pns="http://entity" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
         <parameter qname="pns:password" xmlns:pns="http://entity" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
       </operation>
-      <operation name="getAllCurencies" qname="operNS:getAllCurencies" xmlns:operNS="http://entity" returnQName="retNS:getAllCurenciesReturn" xmlns:retNS="http://entity" returnType="rtns:string" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+      <operation name="loginCustomer" qname="operNS:loginCustomer" xmlns:operNS="http://entity" returnQName="retNS:loginCustomerReturn" xmlns:retNS="http://entity" returnType="rtns:Customer" xmlns:rtns="http://entity" soapAction="" >
+        <parameter qname="pns:login" xmlns:pns="http://entity" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:password" xmlns:pns="http://entity" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <operation name="buy" qname="operNS:buy" xmlns:operNS="http://entity" returnQName="retNS:buyReturn" xmlns:retNS="http://entity" returnType="rtns:boolean" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+        <parameter qname="pns:customerId" xmlns:pns="http://entity" type="tns:int" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <operation name="addProductToCart" qname="operNS:addProductToCart" xmlns:operNS="http://entity" soapAction="" >
+        <parameter qname="pns:customerId" xmlns:pns="http://entity" type="tns:int" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:productId" xmlns:pns="http://entity" type="tns:int" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <operation name="getNameEmployee" qname="operNS:getNameEmployee" xmlns:operNS="http://entity" returnQName="retNS:getNameEmployeeReturn" xmlns:retNS="http://entity" returnType="rtns:string" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+        <parameter qname="pns:id" xmlns:pns="http://entity" type="tns:int" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <operation name="deposit" qname="operNS:deposit" xmlns:operNS="http://entity" soapAction="" >
+        <parameter qname="pns:customerId" xmlns:pns="http://entity" type="tns:int" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:amount" xmlns:pns="http://entity" type="tns:double" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <operation name="withdrawal" qname="operNS:withdrawal" xmlns:operNS="http://entity" returnQName="retNS:withdrawalReturn" xmlns:retNS="http://entity" returnType="rtns:boolean" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+        <parameter qname="pns:customerId" xmlns:pns="http://entity" type="tns:int" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:amount" xmlns:pns="http://entity" type="tns:double" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
       </operation>
       <parameter name="allowedMethods" value="removeProductFromCart createBankAccount buy getFeedBackByProduct convert withdrawal addProductToCart addCustomer loginCustomer deposit getAllCurencies getProductList getNameEmployee"/>
 

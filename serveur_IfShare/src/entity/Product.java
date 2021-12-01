@@ -2,34 +2,34 @@ package entity;
 
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
+import java.util.LinkedList;
 
 import shared.IProduct;
+import shared.IProductObserved;
+import shared.IRequestObserver;
 
-public class Product extends UnicastRemoteObject implements IProduct {
+public class Product extends UnicastRemoteObject implements IProduct, IProductObserved {
 	private int id;
 	private String name;
-	private String type;
 	private String category;
 	private boolean availability;
 	private String image;
 	private int price;
-	private String color;
 	private String state;
 	
-	public Product(int id, String name, String type, String category, boolean availability, String image, int price,
-			String color, String state) throws RemoteException {
+	private LinkedList<IRequestObserver> observerList;
+	
+	public Product(int id, String name, String category, boolean availability, String image, int price, String state) throws RemoteException {
 		super();
 		this.id = id;
 		this.name = name;
-		this.type = type;
 		this.category = category;
 		this.availability = availability;
 		this.image = image;
 		this.price = price;
-		this.color = color;
 		this.state = state;
+		observerList = new LinkedList<IRequestObserver>();
 	}
-
 	public int getId() {
 		return id;
 	}
@@ -46,13 +46,6 @@ public class Product extends UnicastRemoteObject implements IProduct {
 		this.name = name;
 	}
 
-	public String getType() {
-		return type;
-	}
-
-	public void setType(String type) {
-		this.type = type;
-	}
 
 	public String getCategory() {
 		return category;
@@ -66,7 +59,14 @@ public class Product extends UnicastRemoteObject implements IProduct {
 		return availability;
 	}
 
-	public void setAvailability(boolean availability) {
+	public void setAvailability(boolean availability) throws RemoteException {
+		if(availability) {
+			if(!observerList.isEmpty()) {
+				observerList.peek().notifyChange();
+				observerList.removeFirst();		
+			}
+			
+		}
 		this.availability = availability;
 	}
 
@@ -86,13 +86,6 @@ public class Product extends UnicastRemoteObject implements IProduct {
 		this.price = price;
 	}
 
-	public String getColor() {
-		return color;
-	}
-
-	public void setColor(String color) {
-		this.color = color;
-	}
 
 	public String getState() {
 		return state;
@@ -123,6 +116,12 @@ public class Product extends UnicastRemoteObject implements IProduct {
 			return false;
 		return true;
 	}
+	@Override
+	public synchronized void subscribe(IRequestObserver obs) throws RemoteException {
+		observerList.addLast(obs);	
+	}
 	
+	
+
 
 }

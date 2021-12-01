@@ -10,6 +10,7 @@ import java.util.Map;
 import entity.Product;
 import shared.IProduct;
 import shared.IProductController;
+import shared.IProductObserved;
 import shared.IPurshaseController;
 import shared.ISale;
 import shared.ISaleController;
@@ -37,10 +38,8 @@ public class ProductService extends UnicastRemoteObject implements IProductContr
 	}
 
 	@Override
-	public int addProduct(String name, String type, String category, boolean availability, String image, int price,
-			String color, String state) throws RemoteException {
-		IProduct product= new Product(getIdCounter(), name, type,
-				category, availability, image, price, color, state);
+	public int addProduct(String name, String category, boolean availability, String image, int price, String state) throws RemoteException {
+		IProduct product= new Product(getIdCounter(), name, category, availability, image, price, state);
 		productList.put(product.getId(), product);
 		 return product.getId();	    
 			
@@ -114,6 +113,11 @@ public class ProductService extends UnicastRemoteObject implements IProductContr
 	public int getIdCounter() {
 		idCounter++;
 		return idCounter;
+	}
+
+	@Override
+	public IProductObserved searchByIdObserved(int id) throws RemoteException {
+		return (IProductObserved) productList.get(id);
 	}
 
 }

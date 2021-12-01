@@ -13,8 +13,6 @@ import java.util.Map;
 import entity.Purshase;
 import entity.Sale;
 import luncher.IfShareServer;
-import shared.IEmployee;
-import shared.IEmployeeController;
 import shared.IFeedBack;
 import shared.IProduct;
 import shared.IPurshase;
@@ -24,13 +22,10 @@ import shared.ISale;
 public class PurshaseService extends UnicastRemoteObject implements IPurshaseController{
 	Map<Integer,IPurshase> purshases;
 	private int idCounter= 0;
-	Map<Integer, LinkedList<IEmployee>> waitingList;
 
-	IEmployeeController emp;
 	protected PurshaseService() throws RemoteException {
 		super();
 		purshases= new HashMap<Integer, IPurshase>();
-		waitingList= new HashMap<Integer, LinkedList<IEmployee>>();
 	}
 	
 	private static PurshaseService single_instance = null;
@@ -43,7 +38,7 @@ public class PurshaseService extends UnicastRemoteObject implements IPurshaseCon
 		return single_instance;
 	}
 
-
+   // function of purshase of product
 	@Override
 	public IPurshase addPurshase(int employeeId, int saleId) throws RemoteException, MalformedURLException, NotBoundException {
 
@@ -58,24 +53,6 @@ public class PurshaseService extends UnicastRemoteObject implements IPurshaseCon
 			purshases.put(purshase.getId(), purshase);
 			return purshase;	
 		}else {
-			emp= IfShareServer.GetInstance();
-			if(waitingList.containsKey(product.getId()))
-			{
-				
-				LinkedList<IEmployee> empList = waitingList.get(product.getId());
-				IEmployee emp1= emp.searchEmployeeById(employeeId);
-				if(!empList.contains(emp1))
-				{
-					empList.addLast(emp1);
-					System.out.println("you have already request this product");
-				}	
-				
-			}else {
-				LinkedList<IEmployee> empList= new LinkedList<IEmployee>();
-				IEmployee emp1= emp.searchEmployeeById(employeeId);
-				empList.addLast(emp1);
-				waitingList.put(product.getId(), empList);	
-			}
 			return null;			
 		}	
 		
@@ -129,12 +106,6 @@ public class PurshaseService extends UnicastRemoteObject implements IPurshaseCon
 		
 	}
 	
-	public Map<Integer, LinkedList<IEmployee>> getWaitingList() {
-		return waitingList;
-	}
-
-
-
 	public int getIdCounter() {
 		idCounter++;
 		return idCounter;

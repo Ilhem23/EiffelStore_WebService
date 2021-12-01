@@ -5,17 +5,19 @@ import java.rmi.server.UnicastRemoteObject;
 import java.util.HashMap;
 import java.util.Map;
 
-import entity.Employee;
-import shared.IEmployee;
+
+import entity.Request;
+import shared.Employee;
 import shared.IEmployeeController;
+import shared.IRequestObserver;
 
 
 public class EmployeeService extends UnicastRemoteObject implements IEmployeeController{
-	Map<Integer,IEmployee> employees;
+	Map<Integer,Employee> employees;
 	private int idCounter= 0;
 	protected EmployeeService() throws RemoteException {
 		super();
-		employees= new HashMap<Integer, IEmployee>();
+		employees= new HashMap<Integer, Employee>();
 	}
 	private static EmployeeService single_instance = null;
 
@@ -27,9 +29,9 @@ public class EmployeeService extends UnicastRemoteObject implements IEmployeeCon
 	}
 
 	@Override
-	public IEmployee addEmployee(String firstName, String lastName, String email, String address, String login, String password)
+	public Employee addEmployee(String firstName, String lastName, String email, String address, String login, String password)
 			throws RemoteException {
-		IEmployee employee= new Employee(getIdCounter(), firstName, lastName, email, address, login, password);
+		Employee employee= new Employee(getIdCounter(), firstName, lastName, email, address, login, password);
 		employees.put(employee.getId(), employee);
 		return employee;
 	}
@@ -41,7 +43,7 @@ public class EmployeeService extends UnicastRemoteObject implements IEmployeeCon
 	}
 
 	@Override
-	public IEmployee searchEmployeeById(int id) throws RemoteException {
+	public Employee searchEmployeeById(int id) throws RemoteException {
 		
 		return employees.get(id);
 	}
@@ -51,14 +53,21 @@ public class EmployeeService extends UnicastRemoteObject implements IEmployeeCon
 	}
 
 	@Override
-	public void notifyChange(int idEmployee, int idProduct) throws RemoteException {
-		employees.get(idEmployee).addToInbox(idProduct);
+	public Employee login(String login, String password) throws RemoteException {
+		for(Map.Entry<Integer,Employee> emp : employees.entrySet())
+		{
+			if(emp.getValue().getLogin().equals(login) && emp.getValue().getPassword().equals(password)) {
+				return emp.getValue();
+			}
+		}
+		return null;
 	}
 
 	@Override
-	public void removeNotify(int idEmployee, int idProduct) throws RemoteException {
-		
-		employees.get(idEmployee).addToInbox(idProduct);
+	public IRequestObserver addRequest(int idProduct, int employeeId) throws RemoteException {
+		IRequestObserver request= new Request(idProduct, employeeId);
+		return request;
 	}
+
 
 }

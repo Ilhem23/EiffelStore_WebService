@@ -6,36 +6,27 @@ import java.util.Date;
 
 import shared.IFeedBack;
 
-public class FeedBack implements IFeedBack, Serializable{
+public class FeedBack implements Serializable{
 	
     public FeedBack() {
 		
 	}
     
-	private  int id;
+	
     private int productId;
-    private int employeeId;
+    private String employeeName;
     private int rating;	
 	private String comment;
 	private Date dateComment;
 	
 	
-	public FeedBack(int id, int productId, int employeeId, int rating, String comment) throws RemoteException {
+	public FeedBack(int productId, String employeeName, int rating, String comment) throws RemoteException {
 		super();
-		this.id = id;
 		this.productId = productId;
-		this.employeeId = employeeId;
+		this.employeeName = employeeName;
 		this.rating = rating;
 		this.comment = comment;
 		this.dateComment= new Date();
-	}
- 
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
 	}
 
 	public int getProductId() {
@@ -44,14 +35,6 @@ public class FeedBack implements IFeedBack, Serializable{
 
 	public void setProductId(int productId) {
 		this.productId = productId;
-	}
-
-	public int getEmployeeId() {
-		return employeeId;
-	}
-
-	public void setEmployeeId(int employeeId) {
-		this.employeeId = employeeId;
 	}
 
 	public int getRating() {
@@ -76,6 +59,14 @@ public class FeedBack implements IFeedBack, Serializable{
 
 	public void setDateComment(Date dateComment) {
 		this.dateComment = dateComment;
+	}
+
+	public String getEmployeeName() {
+		return employeeName;
+	}
+
+	public void setEmployeeName(String employeeName) {
+		this.employeeName = employeeName;
 	}
 	
 	

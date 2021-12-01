@@ -10,13 +10,6 @@
       <parameter name="className" value="bank.account.Account"/>
       <parameter name="wsdlPortType" value="Account"/>
       <parameter name="typeMappingVersion" value="1.2"/>
-      <operation xmlns:operNS="http://account.bank" xmlns:retNS="http://account.bank" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="withdrawal" qname="operNS:withdrawal" returnQName="retNS:withdrawalReturn" returnType="rtns:boolean" soapAction="">
-        <parameter xmlns:pns="http://account.bank" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:idCustomer" type="tns:int"/>
-        <parameter xmlns:pns="http://account.bank" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:amount" type="tns:double"/>
-      </operation>
-      <operation xmlns:operNS="http://account.bank" xmlns:retNS="http://account.bank" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="accountBalance" qname="operNS:accountBalance" returnQName="retNS:accountBalanceReturn" returnType="rtns:double" soapAction="">
-        <parameter xmlns:pns="http://account.bank" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:idCustomer" type="tns:int"/>
-      </operation>
       <operation xmlns:operNS="http://account.bank" name="createAccount" qname="operNS:createAccount" soapAction="">
         <parameter xmlns:pns="http://account.bank" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:idCustomer" type="tns:int"/>
       </operation>
@@ -24,7 +17,14 @@
         <parameter xmlns:pns="http://account.bank" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:idCustomer" type="tns:int"/>
         <parameter xmlns:pns="http://account.bank" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:amount" type="tns:double"/>
       </operation>
-      <parameter name="allowedMethods" value="deposit withdrawal createAccount accountBalance"/>
+      <operation xmlns:operNS="http://account.bank" xmlns:retNS="http://account.bank" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="withdrawal" qname="operNS:withdrawal" returnQName="retNS:withdrawalReturn" returnType="rtns:boolean" soapAction="">
+        <parameter xmlns:pns="http://account.bank" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:idCustomer" type="tns:int"/>
+        <parameter xmlns:pns="http://account.bank" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:amount" type="tns:double"/>
+      </operation>
+      <operation xmlns:operNS="http://account.bank" xmlns:retNS="http://account.bank" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="accountBalance" qname="operNS:accountBalance" returnQName="retNS:accountBalanceReturn" returnType="rtns:double" soapAction="">
+        <parameter xmlns:pns="http://account.bank" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:idCustomer" type="tns:int"/>
+      </operation>
+      <parameter name="allowedMethods" value="deposit createAccount withdrawal accountBalance"/>
 
   </service>
 </deployment>

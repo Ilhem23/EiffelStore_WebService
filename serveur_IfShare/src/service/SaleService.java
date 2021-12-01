@@ -15,8 +15,6 @@ import java.util.stream.Collectors;
 
 import entity.Sale;
 import luncher.IfShareServer;
-import shared.IEmployee;
-import shared.IEmployeeController;
 import shared.IProduct;
 import shared.IPurshase;
 import shared.ISale;
@@ -87,13 +85,6 @@ public class SaleService extends UnicastRemoteObject implements ISaleController{
 		purshase.setState(false);
 		ISale resale= addSale(product.getId(), purshase.getEmployeeId());
 		soldAtLeastOnes.add(product.getId());
-		if(!purshaseServices.getWaitingList().isEmpty())
-		{
-			IEmployee employee= purshaseServices.getWaitingList().get(product.getId()).peek();
-			IEmployeeController emp= IfShareServer.GetInstance();
-			emp.notifyChange(employee.getId(), product.getId());
-			purshaseServices.getWaitingList().get(product.getId()).removeFirst();
-		}
 		return resale;
 	}
 
@@ -156,12 +147,8 @@ public class SaleService extends UnicastRemoteObject implements ISaleController{
             
            if(id == idProduct)
            {
-        	
         		   if(set.getValue().isState()) {
-        			   return set.getValue();
-        			   
-        		  
-        		  
+        			   return set.getValue();  
         		   
         	   }
         	   

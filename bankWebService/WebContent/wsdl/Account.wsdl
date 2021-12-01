@@ -4,6 +4,27 @@
 Built on Apr 22, 2006 (06:55:48 PDT)-->
  <wsdl:types>
   <schema elementFormDefault="qualified" targetNamespace="http://account.bank" xmlns="http://www.w3.org/2001/XMLSchema">
+   <element name="createAccount">
+    <complexType>
+     <sequence>
+      <element name="idCustomer" type="xsd:int"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="createAccountResponse">
+    <complexType/>
+   </element>
+   <element name="deposit">
+    <complexType>
+     <sequence>
+      <element name="idCustomer" type="xsd:int"/>
+      <element name="amount" type="xsd:double"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="depositResponse">
+    <complexType/>
+   </element>
    <element name="withdrawal">
     <complexType>
      <sequence>
@@ -33,27 +54,6 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
      </sequence>
     </complexType>
    </element>
-   <element name="createAccount">
-    <complexType>
-     <sequence>
-      <element name="idCustomer" type="xsd:int"/>
-     </sequence>
-    </complexType>
-   </element>
-   <element name="createAccountResponse">
-    <complexType/>
-   </element>
-   <element name="deposit">
-    <complexType>
-     <sequence>
-      <element name="idCustomer" type="xsd:int"/>
-      <element name="amount" type="xsd:double"/>
-     </sequence>
-    </complexType>
-   </element>
-   <element name="depositResponse">
-    <complexType/>
-   </element>
   </schema>
  </wsdl:types>
 
@@ -73,22 +73,6 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
 
    </wsdl:message>
 
-   <wsdl:message name="withdrawalRequest">
-
-      <wsdl:part element="impl:withdrawal" name="parameters">
-
-      </wsdl:part>
-
-   </wsdl:message>
-
-   <wsdl:message name="withdrawalResponse">
-
-      <wsdl:part element="impl:withdrawalResponse" name="parameters">
-
-      </wsdl:part>
-
-   </wsdl:message>
-
    <wsdl:message name="createAccountResponse">
 
       <wsdl:part element="impl:createAccountResponse" name="parameters">
@@ -100,6 +84,22 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
    <wsdl:message name="depositResponse">
 
       <wsdl:part element="impl:depositResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="withdrawalRequest">
+
+      <wsdl:part element="impl:withdrawal" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="withdrawalResponse">
+
+      <wsdl:part element="impl:withdrawalResponse" name="parameters">
 
       </wsdl:part>
 
@@ -122,30 +122,6 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
    </wsdl:message>
 
    <wsdl:portType name="Account">
-
-      <wsdl:operation name="withdrawal">
-
-         <wsdl:input message="impl:withdrawalRequest" name="withdrawalRequest">
-
-       </wsdl:input>
-
-         <wsdl:output message="impl:withdrawalResponse" name="withdrawalResponse">
-
-       </wsdl:output>
-
-      </wsdl:operation>
-
-      <wsdl:operation name="accountBalance">
-
-         <wsdl:input message="impl:accountBalanceRequest" name="accountBalanceRequest">
-
-       </wsdl:input>
-
-         <wsdl:output message="impl:accountBalanceResponse" name="accountBalanceResponse">
-
-       </wsdl:output>
-
-      </wsdl:operation>
 
       <wsdl:operation name="createAccount">
 
@@ -171,47 +147,35 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
 
       </wsdl:operation>
 
-   </wsdl:portType>
-
-   <wsdl:binding name="AccountSoapBinding" type="impl:Account">
-
-      <wsdlsoap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
-
       <wsdl:operation name="withdrawal">
 
-         <wsdlsoap:operation soapAction=""/>
+         <wsdl:input message="impl:withdrawalRequest" name="withdrawalRequest">
 
-         <wsdl:input name="withdrawalRequest">
+       </wsdl:input>
 
-            <wsdlsoap:body use="literal"/>
+         <wsdl:output message="impl:withdrawalResponse" name="withdrawalResponse">
 
-         </wsdl:input>
-
-         <wsdl:output name="withdrawalResponse">
-
-            <wsdlsoap:body use="literal"/>
-
-         </wsdl:output>
+       </wsdl:output>
 
       </wsdl:operation>
 
       <wsdl:operation name="accountBalance">
 
-         <wsdlsoap:operation soapAction=""/>
+         <wsdl:input message="impl:accountBalanceRequest" name="accountBalanceRequest">
 
-         <wsdl:input name="accountBalanceRequest">
+       </wsdl:input>
 
-            <wsdlsoap:body use="literal"/>
+         <wsdl:output message="impl:accountBalanceResponse" name="accountBalanceResponse">
 
-         </wsdl:input>
-
-         <wsdl:output name="accountBalanceResponse">
-
-            <wsdlsoap:body use="literal"/>
-
-         </wsdl:output>
+       </wsdl:output>
 
       </wsdl:operation>
+
+   </wsdl:portType>
+
+   <wsdl:binding name="AccountSoapBinding" type="impl:Account">
+
+      <wsdlsoap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
 
       <wsdl:operation name="createAccount">
 
@@ -242,6 +206,42 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
          </wsdl:input>
 
          <wsdl:output name="depositResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="withdrawal">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="withdrawalRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="withdrawalResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="accountBalance">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="accountBalanceRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="accountBalanceResponse">
 
             <wsdlsoap:body use="literal"/>
 

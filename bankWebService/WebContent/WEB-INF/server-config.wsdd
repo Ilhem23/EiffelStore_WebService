@@ -23,21 +23,21 @@
  <ns1:handler name="Authenticate" type="java:org.apache.axis.handlers.SimpleAuthenticationHandler"/>
  <ns1:handler name="LocalResponder" type="java:org.apache.axis.transport.local.LocalResponder"/>
  <ns1:service name="Account" provider="java:RPC" style="wrapped" use="literal">
-  <ns2:operation name="withdrawal" qname="ns1:withdrawal" returnQName="ns1:withdrawalReturn" returnType="xsd:boolean" soapAction="" xmlns:ns1="http://account.bank" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ns2="http://xml.apache.org/axis/wsdd/">
-   <ns2:parameter qname="ns1:idCustomer" type="xsd:int"/>
-   <ns2:parameter qname="ns1:amount" type="xsd:double"/>
+  <ns2:operation name="createAccount" qname="ns1:createAccount" soapAction="" xmlns:ns1="http://account.bank" xmlns:ns2="http://xml.apache.org/axis/wsdd/">
+   <ns2:parameter qname="ns1:idCustomer" type="xsd:int" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
   </ns2:operation>
-  <ns1:operation name="accountBalance" qname="ns2:accountBalance" returnQName="ns2:accountBalanceReturn" returnType="xsd:double" soapAction="" xmlns:ns2="http://account.bank" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-   <ns1:parameter qname="ns2:idCustomer" type="xsd:int"/>
+  <ns1:operation name="deposit" qname="ns2:deposit" soapAction="" xmlns:ns2="http://account.bank">
+   <ns1:parameter qname="ns2:idCustomer" type="xsd:int" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+   <ns1:parameter qname="ns2:amount" type="xsd:double" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
   </ns1:operation>
-  <ns1:operation name="createAccount" qname="ns3:createAccount" soapAction="" xmlns:ns3="http://account.bank">
-   <ns1:parameter qname="ns3:idCustomer" type="xsd:int" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+  <ns1:operation name="withdrawal" qname="ns3:withdrawal" returnQName="ns3:withdrawalReturn" returnType="xsd:boolean" soapAction="" xmlns:ns3="http://account.bank" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+   <ns1:parameter qname="ns3:idCustomer" type="xsd:int"/>
+   <ns1:parameter qname="ns3:amount" type="xsd:double"/>
   </ns1:operation>
-  <ns1:operation name="deposit" qname="ns4:deposit" soapAction="" xmlns:ns4="http://account.bank">
-   <ns1:parameter qname="ns4:idCustomer" type="xsd:int" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
-   <ns1:parameter qname="ns4:amount" type="xsd:double" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+  <ns1:operation name="accountBalance" qname="ns4:accountBalance" returnQName="ns4:accountBalanceReturn" returnType="xsd:double" soapAction="" xmlns:ns4="http://account.bank" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+   <ns1:parameter qname="ns4:idCustomer" type="xsd:int"/>
   </ns1:operation>
-  <ns1:parameter name="allowedMethods" value="deposit withdrawal createAccount accountBalance"/>
+  <ns1:parameter name="allowedMethods" value="deposit createAccount withdrawal accountBalance"/>
   <ns1:parameter name="typeMappingVersion" value="1.2"/>
   <ns1:parameter name="wsdlPortType" value="Account"/>
   <ns1:parameter name="className" value="bank.account.Account"/>

@@ -11,25 +11,20 @@ import shared.IProduct;
 public class Product implements IProduct, Serializable {
 	private int id;
 	private String name;
-	private String type;
 	private String category;
 	private boolean availability;
 	private String image;
 	private int price;
-	private String color;
 	private String state;
 	
-	public Product(int id, String name, String type, String category, boolean availability, String image, int price,
-			String color, String state) throws RemoteException {
+	public Product(int id, String name, String category, boolean availability, String image, int price, String state) throws RemoteException {
 		super();
 		this.id = id;
 		this.name = name;
-		this.type = type;
 		this.category = category;
 		this.availability = availability;
 		this.image = image;
 		this.price = price;
-		this.color = color;
 		this.state = state;
 	}
 	
@@ -53,13 +48,6 @@ public class Product implements IProduct, Serializable {
 		this.name = name;
 	}
 
-	public String getType() {
-		return type;
-	}
-
-	public void setType(String type) {
-		this.type = type;
-	}
 
 	public String getCategory() {
 		return category;
@@ -93,13 +81,6 @@ public class Product implements IProduct, Serializable {
 		this.price = price;
 	}
 
-	public String getColor() {
-		return color;
-	}
-
-	public void setColor(String color) {
-		this.color = color;
-	}
 
 	public String getState() {
 		return state;

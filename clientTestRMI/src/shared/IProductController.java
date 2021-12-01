@@ -7,12 +7,13 @@ import java.util.Map;
 
 public interface IProductController extends Remote {
 
-	public int addProduct(String name, String type, String category, boolean availability, String image, int price,
-			String color, String state) throws RemoteException;
+	public int addProduct(String name, String category, boolean availability, String image, int price, String state) throws RemoteException;
 
 	public List<IProduct> searchByName(String name) throws RemoteException;
 
 	public IProduct searchById(int id) throws RemoteException;
+	
+	public IProductObserved searchByIdObserved(int id) throws RemoteException;
 
 	public List<IProduct> searchByType(String type) throws RemoteException;
 

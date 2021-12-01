@@ -1,13 +1,11 @@
-package entity;
+package shared;
 
-import java.rmi.RemoteException;
-import java.rmi.server.UnicastRemoteObject;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import shared.IEmployee;
 
-public class Employee extends UnicastRemoteObject implements IEmployee{
+public class Employee implements Serializable{
 	
 	private int id;
 	private String firstName;
@@ -18,10 +16,10 @@ public class Employee extends UnicastRemoteObject implements IEmployee{
 	private String password;
 	private List<Integer> inbox;
 	
-	protected Employee() throws RemoteException {
+	protected Employee()  {
 		super();
 	}
-	public Employee(int id, String firstName, String lastName, String email, String address, String login, String password) throws RemoteException {
+	public Employee(int id, String firstName, String lastName, String email, String address, String login, String password)  {
 		super();
 		this.id = id;
 		this.firstName= firstName;

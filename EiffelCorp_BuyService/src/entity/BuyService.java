@@ -66,7 +66,15 @@ public class BuyService {
     	Set<Integer> solds= saleService.getSoldAtLeastOnes();
     	for(int n: solds)
     	{
-    		productList.add((Product) productService.getproducts().get(n));
+    		Product p= new Product();
+    		p.setId(productService.getproducts().get(n).getId());
+    		p.setAvailability(productService.getproducts().get(n).isAvailability());
+    		p.setCategory(productService.getproducts().get(n).getCategory());
+    		p.setImage(productService.getproducts().get(n).getImage());
+    		p.setName(productService.getproducts().get(n).getName());
+    		p.setPrice(productService.getproducts().get(n).getPrice());
+    		p.setState(productService.getproducts().get(n).getState());
+    		productList.add(p);
     	}
     	return productList.toArray(new Product[0]);
     }
@@ -117,9 +125,16 @@ public class BuyService {
     
     public FeedBack[] getFeedBackByProduct(int productId) throws RemoteException{
     	List<FeedBack> feed= new ArrayList<FeedBack>();
+    	
     	for(IFeedBack f: feedBack.searchByProduct(productId)) {
-    		
-    		feed.add((FeedBack) f) ;
+    		String str= employeeService.searchEmployeeById(f.getId()).getFirstName()+" "+ employeeService.searchEmployeeById(f.getId()).getLastName();
+    		FeedBack fe= new FeedBack();
+    		fe.setComment(f.getComment());
+    		fe.setDateComment(f.getDateComment());
+    		fe.setEmployeeName(str);
+    		fe.setRating(f.getRating());
+    		fe.setProductId(f.getProductId());
+    		feed.add(fe) ;
     	}
     	
     	return feed.toArray(new FeedBack[0]);

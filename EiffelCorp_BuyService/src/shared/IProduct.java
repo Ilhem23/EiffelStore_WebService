@@ -13,10 +13,6 @@ public interface IProduct extends Remote{
 
 	public void setName(String name) throws RemoteException;
 
-	public String getType() throws RemoteException;
-
-	public void setType(String type) throws RemoteException;
-
 	public String getCategory() throws RemoteException;
 
 	public void setCategory(String category) throws RemoteException;
@@ -32,10 +28,6 @@ public interface IProduct extends Remote{
 	public int getPrice() throws RemoteException;
 
 	public void setPrice(int price) throws RemoteException;
-
-	public String getColor() throws RemoteException;
-
-	public void setColor(String color) throws RemoteException;
 
 	public String getState() throws RemoteException;
 

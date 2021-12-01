@@ -2,28 +2,16 @@ package luncher;
 
 import java.net.MalformedURLException;
 import java.rmi.Naming;
-import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
-
 import service.FeedBackService;
 import service.ProductService;
 import service.PurshaseService;
 import service.SaleService;
-import shared.IEmployeeController;
-import shared.IProductController;
+
 
 public class IfShareServer {
 
-	public static IEmployeeController employeeService = null;
-	
-	public static IEmployeeController GetInstance() throws RemoteException, MalformedURLException, NotBoundException {
-		if (employeeService == null) {
-			employeeService = (IEmployeeController) Naming.lookup("rmi://localhost:1100/employeeService");
-		}
-		return employeeService;
-
-	}
 
 	public static void main(String[] args) throws RemoteException, MalformedURLException {
 		try {
