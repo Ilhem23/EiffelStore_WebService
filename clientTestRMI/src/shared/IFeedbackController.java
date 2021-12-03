@@ -10,13 +10,11 @@ public interface IFeedbackController extends Remote {
 
 	public boolean removeFeedBack(int id) throws RemoteException;
 	
-	public List<IFeedBack> searchByEmployee(int employeeId) throws RemoteException;
-	
 	public List<IFeedBack> searchByProduct(int productId) throws RemoteException;
 	
-	public IFeedBack searchById(int id) throws RemoteException;
+	public int getRatingByProduct(int productId) throws RemoteException;
 	
-	public List<IFeedBack> getAllFeedBacks() throws RemoteException ;
+	public String getEmployeeName(int idEmployee) throws RemoteException;
 	
-	public void setAllFeedBacks(List<IFeedBack> feedBacks) throws RemoteException ;
+	public boolean productHasFeedback(int idProduct) throws RemoteException;
 }

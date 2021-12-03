@@ -19,41 +19,21 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
      </sequence>
     </complexType>
    </element>
-   <element name="createBankAccount">
+   <element name="getNameEmployee">
     <complexType>
      <sequence>
-      <element name="customerId" type="xsd:int"/>
+      <element name="id" type="xsd:int"/>
      </sequence>
     </complexType>
    </element>
-   <element name="createBankAccountResponse">
-    <complexType/>
-   </element>
-   <element name="getFeedBackByProduct">
+   <element name="getNameEmployeeResponse">
     <complexType>
      <sequence>
-      <element name="productId" type="xsd:int"/>
+      <element name="getNameEmployeeReturn" type="xsd:string"/>
      </sequence>
     </complexType>
    </element>
-   <element name="getFeedBackByProductResponse">
-    <complexType>
-     <sequence>
-      <element maxOccurs="unbounded" name="getFeedBackByProductReturn" type="impl:FeedBack"/>
-     </sequence>
-    </complexType>
-   </element>
-   <complexType name="FeedBack">
-    <sequence>
-     <element name="comment" nillable="true" type="xsd:string"/>
-     <element name="dateComment" nillable="true" type="xsd:dateTime"/>
-     <element name="employeeId" type="xsd:int"/>
-     <element name="id" type="xsd:int"/>
-     <element name="productId" type="xsd:int"/>
-     <element name="rating" type="xsd:int"/>
-    </sequence>
-   </complexType>
-   <element name="removeProductFromCart">
+   <element name="addProductToCart">
     <complexType>
      <sequence>
       <element name="customerId" type="xsd:int"/>
@@ -61,39 +41,8 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
      </sequence>
     </complexType>
    </element>
-   <element name="removeProductFromCartResponse">
+   <element name="addProductToCartResponse">
     <complexType/>
-   </element>
-   <element name="getProductList">
-    <complexType/>
-   </element>
-   <element name="getProductListResponse">
-    <complexType>
-     <sequence>
-      <element maxOccurs="unbounded" name="getProductListReturn" type="impl:Product"/>
-     </sequence>
-    </complexType>
-   </element>
-   <complexType name="Product">
-    <sequence>
-     <element name="availability" type="xsd:boolean"/>
-     <element name="category" nillable="true" type="xsd:string"/>
-     <element name="id" type="xsd:int"/>
-     <element name="image" nillable="true" type="xsd:string"/>
-     <element name="name" nillable="true" type="xsd:string"/>
-     <element name="price" type="xsd:int"/>
-     <element name="state" nillable="true" type="xsd:string"/>
-    </sequence>
-   </complexType>
-   <element name="getAllCurencies">
-    <complexType/>
-   </element>
-   <element name="getAllCurenciesResponse">
-    <complexType>
-     <sequence>
-      <element name="getAllCurenciesReturn" type="xsd:string"/>
-     </sequence>
-    </complexType>
    </element>
    <element name="addCustomer">
     <complexType>
@@ -113,6 +62,21 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
      </sequence>
     </complexType>
    </element>
+   <complexType name="Product">
+    <sequence>
+     <element name="availability" type="xsd:boolean"/>
+     <element name="category" nillable="true" type="xsd:string"/>
+     <element name="description" nillable="true" type="xsd:string"/>
+     <element name="id" type="xsd:int"/>
+     <element name="image" nillable="true" type="xsd:string"/>
+     <element name="inventoryName" nillable="true" type="xsd:string"/>
+     <element name="inventoryStatus" nillable="true" type="xsd:string"/>
+     <element name="name" nillable="true" type="xsd:string"/>
+     <element name="price" type="xsd:int"/>
+     <element name="rating" type="xsd:int"/>
+     <element name="state" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
    <complexType name="ArrayOfProduct">
     <sequence>
      <element maxOccurs="unbounded" minOccurs="0" name="item" type="impl:Product"/>
@@ -145,6 +109,16 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
      </sequence>
     </complexType>
    </element>
+   <element name="getAllCurencies">
+    <complexType/>
+   </element>
+   <element name="getAllCurenciesResponse">
+    <complexType>
+     <sequence>
+      <element name="getAllCurenciesReturn" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
    <element name="buy">
     <complexType>
      <sequence>
@@ -159,28 +133,13 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
      </sequence>
     </complexType>
    </element>
-   <element name="addProductToCart">
-    <complexType>
-     <sequence>
-      <element name="customerId" type="xsd:int"/>
-      <element name="productId" type="xsd:int"/>
-     </sequence>
-    </complexType>
-   </element>
-   <element name="addProductToCartResponse">
+   <element name="getProductList">
     <complexType/>
    </element>
-   <element name="getNameEmployee">
+   <element name="getProductListResponse">
     <complexType>
      <sequence>
-      <element name="id" type="xsd:int"/>
-     </sequence>
-    </complexType>
-   </element>
-   <element name="getNameEmployeeResponse">
-    <complexType>
-     <sequence>
-      <element name="getNameEmployeeReturn" type="xsd:string"/>
+      <element maxOccurs="unbounded" name="getProductListReturn" type="impl:Product"/>
      </sequence>
     </complexType>
    </element>
@@ -210,6 +169,64 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
      </sequence>
     </complexType>
    </element>
+   <element name="getRatingByProduct">
+    <complexType>
+     <sequence>
+      <element name="productId" type="xsd:int"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getRatingByProductResponse">
+    <complexType>
+     <sequence>
+      <element name="getRatingByProductReturn" type="xsd:int"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="createBankAccount">
+    <complexType>
+     <sequence>
+      <element name="customerId" type="xsd:int"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="createBankAccountResponse">
+    <complexType/>
+   </element>
+   <element name="removeProductFromCart">
+    <complexType>
+     <sequence>
+      <element name="customerId" type="xsd:int"/>
+      <element name="productId" type="xsd:int"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="removeProductFromCartResponse">
+    <complexType/>
+   </element>
+   <element name="getFeedBackByProduct">
+    <complexType>
+     <sequence>
+      <element name="productId" type="xsd:int"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getFeedBackByProductResponse">
+    <complexType>
+     <sequence>
+      <element maxOccurs="unbounded" name="getFeedBackByProductReturn" type="impl:FeedBack"/>
+     </sequence>
+    </complexType>
+   </element>
+   <complexType name="FeedBack">
+    <sequence>
+     <element name="comment" nillable="true" type="xsd:string"/>
+     <element name="dateComment" nillable="true" type="xsd:dateTime"/>
+     <element name="employeeName" nillable="true" type="xsd:string"/>
+     <element name="productId" type="xsd:int"/>
+     <element name="rating" type="xsd:int"/>
+    </sequence>
+   </complexType>
   </schema>
  </wsdl:types>
 
@@ -245,6 +262,14 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
 
    </wsdl:message>
 
+   <wsdl:message name="addCustomerResponse">
+
+      <wsdl:part element="impl:addCustomerResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
    <wsdl:message name="getAllCurenciesResponse">
 
       <wsdl:part element="impl:getAllCurenciesResponse" name="parameters">
@@ -253,9 +278,9 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
 
    </wsdl:message>
 
-   <wsdl:message name="addCustomerResponse">
+   <wsdl:message name="getRatingByProductResponse">
 
-      <wsdl:part element="impl:addCustomerResponse" name="parameters">
+      <wsdl:part element="impl:getRatingByProductResponse" name="parameters">
 
       </wsdl:part>
 
@@ -293,9 +318,9 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
 
    </wsdl:message>
 
-   <wsdl:message name="getFeedBackByProductRequest">
+   <wsdl:message name="getNameEmployeeResponse">
 
-      <wsdl:part element="impl:getFeedBackByProduct" name="parameters">
+      <wsdl:part element="impl:getNameEmployeeResponse" name="parameters">
 
       </wsdl:part>
 
@@ -309,9 +334,9 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
 
    </wsdl:message>
 
-   <wsdl:message name="getNameEmployeeResponse">
+   <wsdl:message name="getFeedBackByProductRequest">
 
-      <wsdl:part element="impl:getNameEmployeeResponse" name="parameters">
+      <wsdl:part element="impl:getFeedBackByProduct" name="parameters">
 
       </wsdl:part>
 
@@ -341,17 +366,17 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
 
    </wsdl:message>
 
-   <wsdl:message name="buyResponse">
+   <wsdl:message name="addProductToCartResponse">
 
-      <wsdl:part element="impl:buyResponse" name="parameters">
+      <wsdl:part element="impl:addProductToCartResponse" name="parameters">
 
       </wsdl:part>
 
    </wsdl:message>
 
-   <wsdl:message name="addProductToCartResponse">
+   <wsdl:message name="buyResponse">
 
-      <wsdl:part element="impl:addProductToCartResponse" name="parameters">
+      <wsdl:part element="impl:buyResponse" name="parameters">
 
       </wsdl:part>
 
@@ -381,14 +406,6 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
 
    </wsdl:message>
 
-   <wsdl:message name="buyRequest">
-
-      <wsdl:part element="impl:buy" name="parameters">
-
-      </wsdl:part>
-
-   </wsdl:message>
-
    <wsdl:message name="addProductToCartRequest">
 
       <wsdl:part element="impl:addProductToCart" name="parameters">
@@ -397,9 +414,17 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
 
    </wsdl:message>
 
-   <wsdl:message name="getProductListRequest">
+   <wsdl:message name="buyRequest">
 
-      <wsdl:part element="impl:getProductList" name="parameters">
+      <wsdl:part element="impl:buy" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getRatingByProductRequest">
+
+      <wsdl:part element="impl:getRatingByProduct" name="parameters">
 
       </wsdl:part>
 
@@ -408,6 +433,14 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
    <wsdl:message name="loginCustomerRequest">
 
       <wsdl:part element="impl:loginCustomer" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getProductListRequest">
+
+      <wsdl:part element="impl:getProductList" name="parameters">
 
       </wsdl:part>
 
@@ -435,61 +468,25 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
 
       </wsdl:operation>
 
-      <wsdl:operation name="createBankAccount">
+      <wsdl:operation name="getNameEmployee">
 
-         <wsdl:input message="impl:createBankAccountRequest" name="createBankAccountRequest">
+         <wsdl:input message="impl:getNameEmployeeRequest" name="getNameEmployeeRequest">
 
        </wsdl:input>
 
-         <wsdl:output message="impl:createBankAccountResponse" name="createBankAccountResponse">
+         <wsdl:output message="impl:getNameEmployeeResponse" name="getNameEmployeeResponse">
 
        </wsdl:output>
 
       </wsdl:operation>
 
-      <wsdl:operation name="getFeedBackByProduct">
+      <wsdl:operation name="addProductToCart">
 
-         <wsdl:input message="impl:getFeedBackByProductRequest" name="getFeedBackByProductRequest">
-
-       </wsdl:input>
-
-         <wsdl:output message="impl:getFeedBackByProductResponse" name="getFeedBackByProductResponse">
-
-       </wsdl:output>
-
-      </wsdl:operation>
-
-      <wsdl:operation name="removeProductFromCart">
-
-         <wsdl:input message="impl:removeProductFromCartRequest" name="removeProductFromCartRequest">
+         <wsdl:input message="impl:addProductToCartRequest" name="addProductToCartRequest">
 
        </wsdl:input>
 
-         <wsdl:output message="impl:removeProductFromCartResponse" name="removeProductFromCartResponse">
-
-       </wsdl:output>
-
-      </wsdl:operation>
-
-      <wsdl:operation name="getProductList">
-
-         <wsdl:input message="impl:getProductListRequest" name="getProductListRequest">
-
-       </wsdl:input>
-
-         <wsdl:output message="impl:getProductListResponse" name="getProductListResponse">
-
-       </wsdl:output>
-
-      </wsdl:operation>
-
-      <wsdl:operation name="getAllCurencies">
-
-         <wsdl:input message="impl:getAllCurenciesRequest" name="getAllCurenciesRequest">
-
-       </wsdl:input>
-
-         <wsdl:output message="impl:getAllCurenciesResponse" name="getAllCurenciesResponse">
+         <wsdl:output message="impl:addProductToCartResponse" name="addProductToCartResponse">
 
        </wsdl:output>
 
@@ -519,6 +516,18 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
 
       </wsdl:operation>
 
+      <wsdl:operation name="getAllCurencies">
+
+         <wsdl:input message="impl:getAllCurenciesRequest" name="getAllCurenciesRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:getAllCurenciesResponse" name="getAllCurenciesResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
       <wsdl:operation name="buy">
 
          <wsdl:input message="impl:buyRequest" name="buyRequest">
@@ -531,25 +540,13 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
 
       </wsdl:operation>
 
-      <wsdl:operation name="addProductToCart">
+      <wsdl:operation name="getProductList">
 
-         <wsdl:input message="impl:addProductToCartRequest" name="addProductToCartRequest">
-
-       </wsdl:input>
-
-         <wsdl:output message="impl:addProductToCartResponse" name="addProductToCartResponse">
-
-       </wsdl:output>
-
-      </wsdl:operation>
-
-      <wsdl:operation name="getNameEmployee">
-
-         <wsdl:input message="impl:getNameEmployeeRequest" name="getNameEmployeeRequest">
+         <wsdl:input message="impl:getProductListRequest" name="getProductListRequest">
 
        </wsdl:input>
 
-         <wsdl:output message="impl:getNameEmployeeResponse" name="getNameEmployeeResponse">
+         <wsdl:output message="impl:getProductListResponse" name="getProductListResponse">
 
        </wsdl:output>
 
@@ -579,6 +576,54 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
 
       </wsdl:operation>
 
+      <wsdl:operation name="getRatingByProduct">
+
+         <wsdl:input message="impl:getRatingByProductRequest" name="getRatingByProductRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:getRatingByProductResponse" name="getRatingByProductResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="createBankAccount">
+
+         <wsdl:input message="impl:createBankAccountRequest" name="createBankAccountRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:createBankAccountResponse" name="createBankAccountResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="removeProductFromCart">
+
+         <wsdl:input message="impl:removeProductFromCartRequest" name="removeProductFromCartRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:removeProductFromCartResponse" name="removeProductFromCartResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getFeedBackByProduct">
+
+         <wsdl:input message="impl:getFeedBackByProductRequest" name="getFeedBackByProductRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:getFeedBackByProductResponse" name="getFeedBackByProductResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
    </wsdl:portType>
 
    <wsdl:binding name="BuyServiceSoapBinding" type="impl:BuyService">
@@ -603,17 +648,17 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
 
       </wsdl:operation>
 
-      <wsdl:operation name="createBankAccount">
+      <wsdl:operation name="getNameEmployee">
 
          <wsdlsoap:operation soapAction=""/>
 
-         <wsdl:input name="createBankAccountRequest">
+         <wsdl:input name="getNameEmployeeRequest">
 
             <wsdlsoap:body use="literal"/>
 
          </wsdl:input>
 
-         <wsdl:output name="createBankAccountResponse">
+         <wsdl:output name="getNameEmployeeResponse">
 
             <wsdlsoap:body use="literal"/>
 
@@ -621,71 +666,17 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
 
       </wsdl:operation>
 
-      <wsdl:operation name="getFeedBackByProduct">
+      <wsdl:operation name="addProductToCart">
 
          <wsdlsoap:operation soapAction=""/>
 
-         <wsdl:input name="getFeedBackByProductRequest">
+         <wsdl:input name="addProductToCartRequest">
 
             <wsdlsoap:body use="literal"/>
 
          </wsdl:input>
 
-         <wsdl:output name="getFeedBackByProductResponse">
-
-            <wsdlsoap:body use="literal"/>
-
-         </wsdl:output>
-
-      </wsdl:operation>
-
-      <wsdl:operation name="removeProductFromCart">
-
-         <wsdlsoap:operation soapAction=""/>
-
-         <wsdl:input name="removeProductFromCartRequest">
-
-            <wsdlsoap:body use="literal"/>
-
-         </wsdl:input>
-
-         <wsdl:output name="removeProductFromCartResponse">
-
-            <wsdlsoap:body use="literal"/>
-
-         </wsdl:output>
-
-      </wsdl:operation>
-
-      <wsdl:operation name="getProductList">
-
-         <wsdlsoap:operation soapAction=""/>
-
-         <wsdl:input name="getProductListRequest">
-
-            <wsdlsoap:body use="literal"/>
-
-         </wsdl:input>
-
-         <wsdl:output name="getProductListResponse">
-
-            <wsdlsoap:body use="literal"/>
-
-         </wsdl:output>
-
-      </wsdl:operation>
-
-      <wsdl:operation name="getAllCurencies">
-
-         <wsdlsoap:operation soapAction=""/>
-
-         <wsdl:input name="getAllCurenciesRequest">
-
-            <wsdlsoap:body use="literal"/>
-
-         </wsdl:input>
-
-         <wsdl:output name="getAllCurenciesResponse">
+         <wsdl:output name="addProductToCartResponse">
 
             <wsdlsoap:body use="literal"/>
 
@@ -729,6 +720,24 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
 
       </wsdl:operation>
 
+      <wsdl:operation name="getAllCurencies">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getAllCurenciesRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getAllCurenciesResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
       <wsdl:operation name="buy">
 
          <wsdlsoap:operation soapAction=""/>
@@ -747,35 +756,17 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
 
       </wsdl:operation>
 
-      <wsdl:operation name="addProductToCart">
+      <wsdl:operation name="getProductList">
 
          <wsdlsoap:operation soapAction=""/>
 
-         <wsdl:input name="addProductToCartRequest">
+         <wsdl:input name="getProductListRequest">
 
             <wsdlsoap:body use="literal"/>
 
          </wsdl:input>
 
-         <wsdl:output name="addProductToCartResponse">
-
-            <wsdlsoap:body use="literal"/>
-
-         </wsdl:output>
-
-      </wsdl:operation>
-
-      <wsdl:operation name="getNameEmployee">
-
-         <wsdlsoap:operation soapAction=""/>
-
-         <wsdl:input name="getNameEmployeeRequest">
-
-            <wsdlsoap:body use="literal"/>
-
-         </wsdl:input>
-
-         <wsdl:output name="getNameEmployeeResponse">
+         <wsdl:output name="getProductListResponse">
 
             <wsdlsoap:body use="literal"/>
 
@@ -812,6 +803,78 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
          </wsdl:input>
 
          <wsdl:output name="withdrawalResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getRatingByProduct">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getRatingByProductRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getRatingByProductResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="createBankAccount">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="createBankAccountRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="createBankAccountResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="removeProductFromCart">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="removeProductFromCartRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="removeProductFromCartResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getFeedBackByProduct">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getFeedBackByProductRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getFeedBackByProductResponse">
 
             <wsdlsoap:body use="literal"/>
 

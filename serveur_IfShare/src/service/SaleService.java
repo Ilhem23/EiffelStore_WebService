@@ -33,9 +33,9 @@ public class SaleService extends UnicastRemoteObject implements ISaleController{
 		{
 		for(int sale : soldAtLeastOnes)
 		{
-			 if(productService.searchById(sale).isAvailability()) {
+			 
 				 solds.add(sale);
-			 }		
+			 		
 		}
 		}
 		

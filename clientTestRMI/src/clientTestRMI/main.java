@@ -26,11 +26,11 @@ public class main {
 		Employee emp3= employeeService.searchEmployeeById(3);
 		Employee emp4= employeeService.searchEmployeeById(4);
 		
-		int id = productService.addProduct("tshirt1",  "clothes", true, "tshirt.jpg", 12, "good");
-		int id2 = productService.addProduct("tshirt2",  "clothes", true, "tshirt.jpg", 2, "good");
-		int id3 = productService.addProduct("tshirt3",  "clothes", true, "tshirt.jpg", 13, "good");
+		int id = productService.addProduct("tshirt1",  "clothes", "description", true, "purple-t-shirt.jpg", 12, "good");
+		int id2 = productService.addProduct("tshirt2",  "clothes", "description", true, "teal-t-shirt.jpg", 2, "good");
+		int id3 = productService.addProduct("shoes",  "shoes", "description", true, "shoes.jpg", 13, "good");
 		
-		System.out.println("id of product 1 " + productService.searchById(id).getId());
+		System.out.println("id of product 1 " + productService.searchById(id).getId()+ productService.searchById(id).getDescription());
 		System.out.println("id of product 2 " + productService.searchById(id2).getId());
 		System.out.println("id of product 3 " + productService.searchById(id3).getId());
 		
@@ -52,7 +52,7 @@ public class main {
 					"sale n= : " + s.getId() + "de l'employee: " + s.getEmployeeId() + "product: " + s.getProductId());
 			System.out.println(" State: " + s.isState());
 		}
-
+		feedBack.addFeedBack(saleService.getSaleById(pursh.getIdSale()).getProductId(), pursh.getEmployeeId(), 2, "mediorque");
 		saleService.reSale(pursh.getId(), 5, "mediorque");
 
 		System.out.println(
@@ -112,6 +112,7 @@ public class main {
 	    	   System.out.println("The product "+in+" is available for employee "+emp4.getId());
 	       }
 		IPurshase pursh5 = purshaseService.addPurshase(emp3.getId(), sal.getId());
+		feedBack.addFeedBack(saleService.getSaleById(pursh5.getIdSale()).getProductId(), pursh5.getEmployeeId(), 2, "mediorque");
 		
 		ISale sal2= saleService.reSale(pursh5.getId(), 30, "bonne");
 		

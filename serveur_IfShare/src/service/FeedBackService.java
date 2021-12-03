@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 
 import entity.FeedBack;
+import luncher.IfShareServer;
 import shared.IFeedBack;
 import shared.IFeedbackController;
 import shared.IPurshase;
@@ -53,38 +54,58 @@ public class FeedBackService extends UnicastRemoteObject implements IFeedbackCon
 		return false;
 	}
 
-	@Override
-	public List<IFeedBack> searchByEmployee(int employeeId) throws RemoteException {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 	@Override
 	public List<IFeedBack> searchByProduct(int productId) throws RemoteException {
-		
-		return feedbacks.get(productId);
-	}
-
-	@Override
-	public IFeedBack searchById(int id) throws RemoteException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<IFeedBack> getAllFeedBacks() throws RemoteException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void setAllFeedBacks(List<IFeedBack> feedBacks) throws RemoteException {
-		// TODO Auto-generated method stub
+		if(productHasFeedback(productId)){
+			return feedbacks.get(productId);
+		}
+		else {
+			return null;
+			
+		}	
 		
 	}
+
+
+
 	public int getIdCounter() {
 		idCounter++;
 		return idCounter;
+	}
+
+
+	@Override
+	public int getRatingByProduct(int productId) throws RemoteException {
+		
+		if(productHasFeedback(productId)){
+			int k = 0;
+			int rating = 0; 
+			List<IFeedBack> fb = feedbacks.get(productId);
+			for(IFeedBack feed: fb) {
+				rating= rating + feed.getRating();
+				k++;
+			}
+			return rating/ k;
+		}
+		return 0;
+	}
+
+
+	@Override
+	public String getEmployeeName(int idEmployee) throws RemoteException {
+		return IfShareServer.employeeService.searchEmployeeById(idEmployee).getFirstName() + " "
+				+ IfShareServer.employeeService.searchEmployeeById(idEmployee).getLastName();
+	}
+
+
+	@Override
+	public boolean productHasFeedback(int idProduct) throws RemoteException {
+		if(feedbacks.containsKey(idProduct))
+		{
+			return true;
+		}
+		return false;
 	}
 
 

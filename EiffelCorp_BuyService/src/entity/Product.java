@@ -5,6 +5,7 @@ import java.rmi.RemoteException;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
+
 import shared.IProduct;
 
 
@@ -12,10 +13,14 @@ public class Product implements IProduct, Serializable {
 	private int id;
 	private String name;
 	private String category;
+	private String description;
 	private boolean availability;
 	private String image;
 	private int price;
 	private String state;
+	private int rating;
+	private String inventoryStatus;
+	private String inventoryName;
 	
 	public Product(int id, String name, String category, boolean availability, String image, int price, String state) throws RemoteException {
 		super();
@@ -111,6 +116,37 @@ public class Product implements IProduct, Serializable {
 			return false;
 		return true;
 	}
+
+
+	public String getDescription() {
+		
+		return description;
+	}
+
 	
+	public void setDescription(String description) {
+		this.description= description;
+		
+	}
+
+	public int getRating() {
+		return rating;
+	}
+
+	public void setRating(int rating) {
+		this.rating = rating;
+	}
+
+	public String getInventoryStatus() {
+		return inventoryStatus;
+	}
+
+	public void setInventoryStatus(String inventoryStatus) {
+		this.inventoryStatus = inventoryStatus;
+	}
+
+	public void setInventoryName(String inventoryName) {
+		this.inventoryName = inventoryName;
+	}
 
 }

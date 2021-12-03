@@ -38,8 +38,9 @@ public class ProductService extends UnicastRemoteObject implements IProductContr
 	}
 
 	@Override
-	public int addProduct(String name, String category, boolean availability, String image, int price, String state) throws RemoteException {
+	public int addProduct(String name, String category, String description,  boolean availability, String image, int price, String state) throws RemoteException {
 		IProduct product= new Product(getIdCounter(), name, category, availability, image, price, state);
+		product.setDescription(description);
 		productList.put(product.getId(), product);
 		 return product.getId();	    
 			

@@ -32,6 +32,10 @@ public interface IProduct extends Remote{
 	public String getState() throws RemoteException;
 
 	public void setState(String state) throws RemoteException;
+	
+	public String getDescription() throws RemoteException;
+	
+	public void setDescription(String description) throws RemoteException;
 
 
 

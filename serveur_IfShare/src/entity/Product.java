@@ -12,6 +12,7 @@ public class Product extends UnicastRemoteObject implements IProduct, IProductOb
 	private int id;
 	private String name;
 	private String category;
+	private String description;
 	private boolean availability;
 	private String image;
 	private int price;
@@ -119,6 +120,12 @@ public class Product extends UnicastRemoteObject implements IProduct, IProductOb
 	@Override
 	public synchronized void subscribe(IRequestObserver obs) throws RemoteException {
 		observerList.addLast(obs);	
+	}
+	public String getDescription() {
+		return description;
+	}
+	public void setDescription(String description) {
+		this.description = description;
 	}
 	
 	

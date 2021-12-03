@@ -8,11 +8,12 @@ import service.FeedBackService;
 import service.ProductService;
 import service.PurshaseService;
 import service.SaleService;
+import shared.IEmployeeController;
 
 
 public class IfShareServer {
 
-
+	public static IEmployeeController employeeService = null;
 	public static void main(String[] args) throws RemoteException, MalformedURLException {
 		try {
 			LocateRegistry.createRegistry(1099);
@@ -30,6 +31,12 @@ public class IfShareServer {
 
 			System.out.println("An Error Has Occured while running the server  stacktrace : " + e.getMessage());
 
+		}
+		try {
+			employeeService = (IEmployeeController) Naming.lookup("rmi://localhost:1100/employeeService");
+			
+		} catch (Exception e) {
+			System.out.println("An Error Has Occured while running the server  stacktrace : " + e.getMessage());
 		}
 
 	}
