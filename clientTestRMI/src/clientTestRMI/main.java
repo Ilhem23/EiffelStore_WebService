@@ -30,7 +30,7 @@ public class main {
 		Employee emp4= employeeService.searchEmployeeById(4); 
 		
 		
-		// 
+		// add sale of products to employees who sale the product
 		ISale saleId1 = saleService.addSale(1, emp1.getId());
 		ISale saleId2 = saleService.addSale(2, emp2.getId());
 		ISale saleId3 = saleService.addSale(3, emp3.getId());
@@ -43,78 +43,84 @@ public class main {
 		ISale saleId10 = saleService.addSale(10, emp1.getId());
 		ISale saleId11 = saleService.addSale(11, emp2.getId());
 		ISale saleId12 = saleService.addSale(12, emp3.getId());
-		ISale saleId13 = saleService.addSale(13, emp1.getId());
-		ISale saleId14 = saleService.addSale(14, emp2.getId());
-		ISale saleId15 = saleService.addSale(15, emp3.getId());
-		ISale saleId16 = saleService.addSale(16, emp1.getId());
-		ISale saleId17 = saleService.addSale(17, emp2.getId());
+		ISale saleId13 = saleService.addSale(13, emp4.getId());
+		ISale saleId14 = saleService.addSale(14, emp4.getId());
+		ISale saleId15 = saleService.addSale(15, emp4.getId());
+		ISale saleId16 = saleService.addSale(16, emp4.getId());
+		ISale saleId17 = saleService.addSale(17, emp4.getId());
 		
+		
+		// show the list of sales : id sale with id of employee and id of product
 		List<ISale> sales = saleService.getSales();
 		for (ISale s : saleService.getSales()) {
 			System.out.println(
 					"sale n= : " + s.getId() + "de l'employee: " + s.getEmployeeId() + "product: " + s.getProductId());
 			System.out.println(" State: " + s.isState());
 		}
-		IPurshase pursh = purshaseService.addPurshase(emp3.getId(), saleId1.getId());
-
-		System.out.println("id " + pursh.getId() + "employee " + pursh.getEmployeeId());
-		for (ISale s : saleService.getSales()) {
-			System.out.println(
-					"sale n= : " + s.getId() + "de l'employee: " + s.getEmployeeId() + "product: " + s.getProductId());
-			System.out.println(" State: " + s.isState());
-		}
-		feedBack.addFeedBack(saleService.getSaleById(pursh.getIdSale()).getProductId(), pursh.getEmployeeId(), 2, "mediorque");
-		saleService.reSale(pursh.getId(), 5, "mediorque");
-
-		System.out.println(
-				"purshase id " + pursh.getId() + "employee " + pursh.getEmployeeId() + "Etat: " + pursh.isState());
-		for (ISale s : saleService.getSales()) {
-			System.out.println(
-					"sale n= : " + s.getId() + "de l'employee: " + s.getEmployeeId() + "product: " + s.getProductId());
-			System.out.println(" State: " + s.isState());
-		}
-		for (int sold : saleService.getSoldAtLeastOnes()) {
-			System.out.println("id of products " + sold);
-		}
 		
-		IPurshase pursh2 = purshaseService.addPurshase(emp1.getId(), saleId2.getId());
- 
-		IPurshase pursh3 = purshaseService.addPurshase(emp3.getId(), saleId2.getId());
-    
-		IPurshase pursh4 = purshaseService.addPurshase(emp4.getId(), saleId2.getId());
 		
-		IPurshase pursh7 = purshaseService.addPurshase(emp4.getId(), saleId2.getId());
 		
-		if(pursh3 == null)
-		{
-			System.out.println("the product is not available for employee "+emp3.getId()+", you will be notify when the product is available");
-		}
-		if(pursh4 == null)
-		{
-			System.out.println("the product is not available for employee "+emp4.getId()+", you will be notify when the product is available");
-		}
+		// purchase all products by all employees
 		
-		IRequestObserver request1= employeeService.addRequest(saleId2.getProductId(), emp3.getId());
-		IRequestObserver request2= employeeService.addRequest(saleId2.getProductId(), emp4.getId());
+		IPurshase pursh1 = purshaseService.addPurshase(emp4.getId(), saleId1.getId());
+		IPurshase pursh2 = purshaseService.addPurshase(emp4.getId(), saleId2.getId());
+		IPurshase pursh3 = purshaseService.addPurshase(emp4.getId(), saleId3.getId());
+		IPurshase pursh4 = purshaseService.addPurshase(emp4.getId(), saleId4.getId());
+		IPurshase pursh5 = purshaseService.addPurshase(emp4.getId(), saleId5.getId());
+		IPurshase pursh6 = purshaseService.addPurshase(emp3.getId(), saleId6.getId());
+		IPurshase pursh7 = purshaseService.addPurshase(emp2.getId(), saleId7.getId());
+		IPurshase pursh8 = purshaseService.addPurshase(emp1.getId(), saleId8.getId());
+		IPurshase pursh9 = purshaseService.addPurshase(emp2.getId(), saleId9.getId());
+		IPurshase pursh10 = purshaseService.addPurshase(emp3.getId(), saleId10.getId());
+		IPurshase pursh11 = purshaseService.addPurshase(emp1.getId(), saleId11.getId());
+		IPurshase pursh12 = purshaseService.addPurshase(emp2.getId(), saleId12.getId());
+		IPurshase pursh13 = purshaseService.addPurshase(emp2.getId(), saleId13.getId());
+		IPurshase pursh14 = purshaseService.addPurshase(emp1.getId(), saleId14.getId());
+		IPurshase pursh15 = purshaseService.addPurshase(emp3.getId(), saleId15.getId());
+		IPurshase pursh16 = purshaseService.addPurshase(emp2.getId(), saleId16.getId());
+		IPurshase pursh17 = purshaseService.addPurshase(emp1.getId(), saleId17.getId());
 		
-		productService.searchByIdObserved(saleId2.getProductId()).subscribe(request1);
+		// show the purchase of sale 1 
+		System.out.println("id " + pursh1.getId() + " employee " + pursh1.getEmployeeId());
+		
+		
+		// request a not available product
+		// create a observers 
+		IRequestObserver request1= employeeService.addRequest(saleId1.getProductId(), emp3.getId());
+		IRequestObserver request2= employeeService.addRequest(saleId2.getProductId(), emp1.getId());
+		IRequestObserver request3= employeeService.addRequest(saleId3.getProductId(), emp2.getId());
+		IRequestObserver request4= employeeService.addRequest(saleId9.getProductId(), emp4.getId());
+		
+		
+		// subscribe the observers to the the corresponding products
+		
+		productService.searchByIdObserved(saleId1.getProductId()).subscribe(request1);
 		productService.searchByIdObserved(saleId2.getProductId()).subscribe(request2);
-		
-		feedBack.addFeedBack(saleService.getSaleById(pursh2.getIdSale()).getProductId(), pursh2.getEmployeeId(), 5, "good quality");
-		int ip= saleService.getSaleById(pursh2.getIdSale()).getProductId();
-		for(IFeedBack f: feedBack.searchByProduct(ip)) {
-			
-			System.out.println("The comment for product  "+ip+" by employee "+f.getEmployeeId()+" is: "+ f.getComment());
-		}
+		productService.searchByIdObserved(saleId3.getProductId()).subscribe(request3);
+		productService.searchByIdObserved(saleId9.getProductId()).subscribe(request4);
 		
 		
-		ISale sal= saleService.reSale(pursh2.getId(), 13, "bonne");
+		// add feedback to the product upon resale
+				feedBack.addFeedBack(saleService.getSaleById(pursh1.getIdSale()).getProductId(), pursh1.getEmployeeId(), 5, "very good quality");
+				feedBack.addFeedBack(saleService.getSaleById(pursh2.getIdSale()).getProductId(), pursh1.getEmployeeId(), 4, "good quality");
+				feedBack.addFeedBack(saleService.getSaleById(pursh3.getIdSale()).getProductId(), pursh1.getEmployeeId(), 3, "well it is good");
+				feedBack.addFeedBack(saleService.getSaleById(pursh9.getIdSale()).getProductId(), pursh1.getEmployeeId(), 3, "good sale");
 		
-		List<Integer> inbox= employeeService.searchEmployeeById(emp3.getId()).getInbox();
+		// resale of products that employees make a request with change of price and the state
 		
-		List<Integer> inbox2= employeeService.searchEmployeeById(emp4.getId()).getInbox();
+		ISale resal1= saleService.reSale(pursh1.getId(), 40, "used - like new");
+		ISale resal2= saleService.reSale(pursh2.getId(), 55, "Used - good condition");
+		ISale resal3= saleService.reSale(pursh3.getId(), 60, "used - like new");
+		ISale resal4= saleService.reSale(pursh9.getId(), 70, "used - like new");
+		
+	
+		// show the notification inbox of employees after the resale
+		List<Integer> inbox1= employeeService.searchEmployeeById(emp1.getId()).getInbox();
+		List<Integer> inbox2= employeeService.searchEmployeeById(emp2.getId()).getInbox();
+		List<Integer> inbox3= employeeService.searchEmployeeById(emp3.getId()).getInbox();
+		List<Integer> inbox4= employeeService.searchEmployeeById(emp4.getId()).getInbox();
       
-		for(int in : inbox)
+		for(int in : inbox1)
        {
     	   System.out.println("The product "+in+" is available for employee "+emp3.getId());
        }
@@ -122,23 +128,15 @@ public class main {
 	       {
 	    	   System.out.println("The product "+in+" is available for employee "+emp4.getId());
 	       }
-		IPurshase pursh5 = purshaseService.addPurshase(emp3.getId(), sal.getId());
-		feedBack.addFeedBack(saleService.getSaleById(pursh5.getIdSale()).getProductId(), pursh5.getEmployeeId(), 2, "mediorque");
-		
-		ISale sal2= saleService.reSale(pursh5.getId(), 30, "bonne");
-		
-		List<Integer> inbox3= employeeService.searchEmployeeById(emp3.getId()).getInbox();
-		
-		List<Integer> inbox4= employeeService.searchEmployeeById(emp4.getId()).getInbox();
-      
 		for(int in : inbox3)
-       {
-    	   System.out.println("The product "+in+" is available for employee "+emp3.getId());
-       }
+	       {
+	    	   System.out.println("The product "+in+" is available for employee "+emp4.getId());
+	       }
 		for(int in : inbox4)
 	       {
 	    	   System.out.println("The product "+in+" is available for employee "+emp4.getId());
 	       }
+		
 	}
 
 }
