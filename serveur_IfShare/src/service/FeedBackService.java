@@ -61,7 +61,7 @@ public class FeedBackService extends UnicastRemoteObject implements IFeedbackCon
 			return feedbacks.get(productId);
 		}
 		else {
-			return null;
+			return  new ArrayList<IFeedBack>();
 			
 		}	
 		

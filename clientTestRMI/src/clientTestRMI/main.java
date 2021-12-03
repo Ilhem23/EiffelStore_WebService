@@ -15,28 +15,39 @@ public class main {
 	public static IEmployeeController employeeService = null;
 	public static IFeedbackController feedBack = null;
 	public static void main(String[] args) throws MalformedURLException, RemoteException, NotBoundException {
-
+		
+		// recover the services from the RMI serveur : productService, saleService, purshaseService, employeeService, feedBack
 		productService = (IProductController) Naming.lookup("rmi://localhost:1099/productService");
 		saleService = (ISaleController) Naming.lookup("rmi://localhost:1099/saleService");
 		purshaseService = (IPurshaseController) Naming.lookup("rmi://localhost:1099/purshaseService");
 		employeeService = (IEmployeeController) Naming.lookup("rmi://localhost:1100/employeeService");
 		feedBack = (IFeedbackController) Naming.lookup("rmi://localhost:1099/feedBack");
+		
+		// get the the four employee of the company ( passing by value)
 		Employee emp1= employeeService.searchEmployeeById(1);
 		Employee emp2= employeeService.searchEmployeeById(2);
 		Employee emp3= employeeService.searchEmployeeById(3);
-		Employee emp4= employeeService.searchEmployeeById(4);
+		Employee emp4= employeeService.searchEmployeeById(4); 
 		
-		int id = productService.addProduct("tshirt1",  "clothes", "description", true, "purple-t-shirt.jpg", 12, "good");
-		int id2 = productService.addProduct("tshirt2",  "clothes", "description", true, "teal-t-shirt.jpg", 2, "good");
-		int id3 = productService.addProduct("shoes",  "shoes", "description", true, "shoes.jpg", 13, "good");
 		
-		System.out.println("id of product 1 " + productService.searchById(id).getId()+ productService.searchById(id).getDescription());
-		System.out.println("id of product 2 " + productService.searchById(id2).getId());
-		System.out.println("id of product 3 " + productService.searchById(id3).getId());
-		
-		ISale saleId1 = saleService.addSale(id, emp1.getId());
-		ISale saleId2 = saleService.addSale(id2, emp2.getId());
-		ISale saleId3 = saleService.addSale(id3, emp3.getId());
+		// 
+		ISale saleId1 = saleService.addSale(1, emp1.getId());
+		ISale saleId2 = saleService.addSale(2, emp2.getId());
+		ISale saleId3 = saleService.addSale(3, emp3.getId());
+		ISale saleId4 = saleService.addSale(4, emp1.getId());
+		ISale saleId5 = saleService.addSale(5, emp2.getId());
+		ISale saleId6 = saleService.addSale(6, emp3.getId());
+		ISale saleId7 = saleService.addSale(7, emp1.getId());
+		ISale saleId8 = saleService.addSale(8, emp2.getId());
+		ISale saleId9 = saleService.addSale(9, emp3.getId());
+		ISale saleId10 = saleService.addSale(10, emp1.getId());
+		ISale saleId11 = saleService.addSale(11, emp2.getId());
+		ISale saleId12 = saleService.addSale(12, emp3.getId());
+		ISale saleId13 = saleService.addSale(13, emp1.getId());
+		ISale saleId14 = saleService.addSale(14, emp2.getId());
+		ISale saleId15 = saleService.addSale(15, emp3.getId());
+		ISale saleId16 = saleService.addSale(16, emp1.getId());
+		ISale saleId17 = saleService.addSale(17, emp2.getId());
 		
 		List<ISale> sales = saleService.getSales();
 		for (ISale s : saleService.getSales()) {

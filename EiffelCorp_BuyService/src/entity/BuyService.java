@@ -136,19 +136,23 @@ public class BuyService {
 
 	public FeedBack[] getFeedBackByProduct(int productId) throws RemoteException {
 		List<FeedBack> feed = new ArrayList<FeedBack>();
+     if(! feedBack.searchByProduct(productId).isEmpty()) {
+    	 for (IFeedBack f : feedBack.searchByProduct(productId)) {
+ 			String str =feedBack.getEmployeeName(f.getEmployeeId());
+ 			FeedBack fe = new FeedBack();
+ 			fe.setComment(f.getComment());
+ 			fe.setDateComment(f.getDateComment());
+ 			fe.setEmployeeName(str);
+ 			fe.setRating(f.getRating());
+ 			fe.setProductId(f.getProductId());
+ 			feed.add(fe);
+ 		}
 
-		for (IFeedBack f : feedBack.searchByProduct(productId)) {
-			String str =feedBack.getEmployeeName(f.getEmployeeId());
-			FeedBack fe = new FeedBack();
-			fe.setComment(f.getComment());
-			fe.setDateComment(f.getDateComment());
-			fe.setEmployeeName(str);
-			fe.setRating(f.getRating());
-			fe.setProductId(f.getProductId());
-			feed.add(fe);
-		}
-
-		return feed.toArray(new FeedBack[0]);
+ 		return feed.toArray(new FeedBack[0]);
+    	 
+     }
+     return feed.toArray(new FeedBack[0]);
+		
 	}
 
 	public int getRatingByProduct(int productId) throws RemoteException {
