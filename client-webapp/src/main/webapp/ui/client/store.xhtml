@@ -1,0 +1,175 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui" template="/WEB-INF/template.xhtml">
+
+	<ui:define name="implementation">
+		<div class="card product">
+
+			<h:form id="form">
+				<p:growl id="messages" showDetail="true" />
+				<p:dataView id="dt-products" var="product"
+					value="#{storeView.products}" rows="12" paginator="true"
+					rowsPerPageTemplate="6,12,16"
+					paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+					gridIcon="pi pi-th-large" listIcon="pi pi-bars" layout="grid">
+
+					<p:dataViewGridItem>
+						<div class="product-grid-item card border-1">
+							<div class="product-grid-item-top">
+								<div>
+									<i class="pi pi-tag product-category-icon" /> <span
+										class="product-category">#{product.category}</span>
+								</div>
+								<span class="product-badge status-#{product.inventoryStatus.replaceAll(' ','').toLowerCase()}">#{product.inventoryStatus}</span>
+							</div>
+							<div class="product-grid-item-content">
+								<p:graphicImage name="images/product/#{product.image}"
+									library="demo" />
+								<div class="product-name">#{product.name}</div>
+								<div class="product-description">#{product.description}</div>
+								<p:rating readonly="true" value="#{product.rating}" />
+								<h:outputText value="#{product.price}"
+									styleClass="product-price">
+									<f:convertNumber currencySymbol="€" type="currency" />
+								</h:outputText>
+								<div class="p-mt-2">
+									<p:commandButton update=":form:productDetail" oncomplete="PF('productDialog').show()" icon="pi pi-search"
+										process="@this" styleClass="rounded-button p-mr-2">
+										 <f:setPropertyActionListener value="#{product}"
+                                                 target="#{storeView.selectedProduct}"/>
+                                     </p:commandButton>
+									<p:commandButton icon="pi pi-shopping-cart"
+										styleClass="ui-button-success rounded-button p-mr-2"
+										process="@this" oncomplete="PF('deleteProductDialog').show()"
+										disabled="#{storeView.alreadyInCart(product)}">
+										<f:setPropertyActionListener value="#{product}"
+											target="#{storeView.selectedProduct}" />
+									</p:commandButton>
+
+								</div>
+
+							</div>
+						</div>
+					</p:dataViewGridItem>
+
+					<p:dataViewListItem>
+												<div class="product-grid-item card border-1">
+							<div class="product-grid-item-top">
+								<div>
+									<i class="pi pi-tag product-category-icon" /> <span
+										class="product-category">#{product.category}</span>
+								</div>
+								<span class="product-badge status-#{product.inventoryStatus.replaceAll(' ','').toLowerCase()}">#{product.inventoryStatus}</span>
+							</div>
+							<div class="product-grid-item-content">
+								<p:graphicImage name="images/product/#{product.image}"
+									library="demo" />
+								<div class="product-name">#{product.name}</div>
+								<div class="product-description">#{product.description}</div>
+								<p:rating readonly="true" value="#{product.rating}" />
+								<h:outputText value="#{product.price}"
+									styleClass="product-price">
+									<f:convertNumber currencySymbol="€" type="currency" />
+								</h:outputText>
+								<div class="p-mt-2">
+									<p:commandButton update=":form:productDetail" oncomplete="PF('productDialog').show()" icon="pi pi-search"
+										process="@this" styleClass="rounded-button p-mr-2">
+										 <f:setPropertyActionListener value="#{product}"
+                                                 target="#{storeView.selectedProduct}"/>
+                                     </p:commandButton>
+									<p:commandButton icon="pi pi-shopping-cart"
+										styleClass="ui-button-success rounded-button p-mr-2"
+										process="@this" oncomplete="PF('deleteProductDialog').show()"
+										disabled="#{storeView.alreadyInCart(product)}">
+										<f:setPropertyActionListener value="#{product}"
+											target="#{storeView.selectedProduct}" />
+									</p:commandButton>
+
+								</div>
+
+							</div>
+						</div>
+					</p:dataViewListItem>
+				</p:dataView>
+				
+				<p:confirmDialog widgetVar="deleteProductDialog" showEffect="fade"
+					width="300" message="Do you want to add product to cart?"
+					header="Confirm" severity="warn">
+					<p:commandButton value="Yes" icon="pi pi-check"
+						actionListener="#{storeView.addToCart}" process="@this"
+						oncomplete="PF('deleteProductDialog').hide()" />
+					<p:commandButton value="No" type="button"
+						styleClass="ui-button-secondary" icon="pi pi-times"
+						onclick="PF('deleteProductDialog').hide()" />
+				</p:confirmDialog>
+
+
+ <p:dialog header="Product Info" widgetVar="productDialog" modal="true" showEffect="fade"
+              hideEffect="fade" resizable="true">
+        <p:outputPanel id="productDetail" style="text-align:center;">
+            <p:column rendered="#{not empty storeView.selectedProduct}">
+            <p:scrollPanel style="width:500px;height:400px">
+                <div class="product">
+                    <div class="product-grid-item card" style="margin-bottom: 0">
+                        <div class="product-grid-item-top">
+                            <div>
+                                <i class="pi pi-tag product-category-icon"/>
+                                <span class="product-category">#{storeView.selectedProduct.category}</span>
+                            </div>
+                            <span class="product-badge status-#{storeView.selectedProduct.inventoryStatus.replaceAll(' ','').toLowerCase()}">#{storeView.selectedProduct.inventoryStatus}</span>
+                        </div>
+                        <div class="product-grid-item-content">
+                            <p:graphicImage
+                                    name="images/product/#{storeView.selectedProduct.image}" library="demo"/>
+                            <div class="product-name">#{storeView.selectedProduct.name}</div>
+                            <div class="product-description">#{storeView.selectedProduct.description}</div>
+                            <p:rating readonly="true" value="#{storeView.selectedProduct.rating}"/>
+                            <h:outputText value="#{storeView.selectedProduct.price}"
+                                          styleClass="product-price">
+                                <f:convertNumber currencySymbol="€" type="currency"/>
+                            </h:outputText>
+                        </div>
+                        
+                    </div>
+                </div>
+                
+         <p:repeat id="feed" rendered="#{not empty storeView.getFeed()}" var="feedback" value="#{storeView.getFeed()}">
+             <style>
+             #feed ui-dataview-header{
+             visibility: hidden;
+             }
+             </style>
+             
+                <h:panelGrid columns="2" style="width:100%" cellspacing="20">
+                    <p:outputPanel>
+                        <h:panelGrid columns="2" cellpadding="7">
+                            
+                                <p:avatar icon="pi pi-user" styleClass="p-mr-2" size="large" style="background-color:#2196F3; color:#fff" shape="circle" />
+                                <h:outputText value="#{feedback.employeeName}"/>
+                          
+                             
+                        </h:panelGrid>
+                         <h:panelGrid columns="1" cellpadding="7">
+                        <p:rating readonly="true" value="#{feedback.rating}"/>
+                            <h:outputText value="#{feedback.comment}" styleClass="text-secondary"/>
+                     </h:panelGrid>
+                    </p:outputPanel>
+                </h:panelGrid>
+                                   
+                    
+        </p:repeat>
+                </p:scrollPanel>
+
+            </p:column>
+        </p:outputPanel>
+    </p:dialog>
+      
+
+			</h:form>
+		</div>
+
+	</ui:define>
+
+</ui:composition>

@@ -24,14 +24,13 @@ import shared.IPurshaseController;
 import shared.ISaleController;
 
 public class BuyService {
-	private int idCounter = 0;
-	private static List<Customer> customers;
+	private static int idCounter = 0;
+	private static List<Customer> customers= null;
 	public static IProductController productService = null;
 	public static ISaleController saleService = null;
 	public static IPurshaseController purshaseService = null;
 	public static IFeedbackController feedBack = null;
-
-	public static Account account;
+	public static Account account= null;
 
 	public BuyService() throws MalformedURLException, RemoteException, NotBoundException, ServiceException {
 		super();
@@ -39,10 +38,24 @@ public class BuyService {
 		saleService = (ISaleController) Naming.lookup("rmi://localhost:1099/saleService");
 		purshaseService = (IPurshaseController) Naming.lookup("rmi://localhost:1099/purshaseService");
 		feedBack = (IFeedbackController) Naming.lookup("rmi://localhost:1099/feedBack");
-		customers = new ArrayList<Customer>();
-		account = new AccountServiceLocator().getAccount();
+		BuyService.GetCustomerInstance();
+		BuyService.getAccountInstance();
 		((AccountSoapBindingStub) account).setMaintainSession(true);
 	}
+	
+	public static void GetCustomerInstance() throws RemoteException {
+		if (customers == null) {
+			customers = new ArrayList<Customer>();
+			
+		}
+	}
+	public static void getAccountInstance() throws ServiceException {
+		if(account == null) {
+			account = new AccountServiceLocator().getAccount();
+			
+		}
+	} 
+	
 
 	public double convert(double montant, String currency) throws RemoteException, ServiceException {
 
@@ -63,33 +76,39 @@ public class BuyService {
 
 		Set<Integer> solds = saleService.getSoldAtLeastOnes();
 		for (int n : solds) {
-			Product p = new Product();
-			p.setId(productService.getproducts().get(n).getId());
-			p.setAvailability(productService.getproducts().get(n).isAvailability());
-			p.setCategory(productService.getproducts().get(n).getCategory());
-			p.setImage(productService.getproducts().get(n).getImage());
-			p.setName(productService.getproducts().get(n).getName());
-			p.setPrice(productService.getproducts().get(n).getPrice());
-			p.setState(productService.getproducts().get(n).getState());
-			p.setDescription(productService.getproducts().get(n).getDescription());
-			int rating = getRatingByProduct(productService.getproducts().get(n).getId());
-			p.setRating(rating);
-			if (p.isAvailability()) {
-				p.setInventoryStatus("IN STOCK");
-				p.setInventoryName("instock");
-
-			} else {
-				p.setInventoryStatus("IN STOCK");
-				p.setInventoryName("outofstock");
-			}
-
+			Product p = convertProduct(n);
 			productList.add(p);
 		}
 		return productList.toArray(new Product[0]);
 	}
+	
+	public Product convertProduct(int n) throws RemoteException {
+		Product p = new Product();
+		p.setId(productService.getproducts().get(n).getId());
+		p.setAvailability(productService.getproducts().get(n).isAvailability());
+		p.setCategory(productService.getproducts().get(n).getCategory());
+		p.setImage(productService.getproducts().get(n).getImage());
+		p.setName(productService.getproducts().get(n).getName());
+		p.setPrice(productService.getproducts().get(n).getPrice());
+		p.setState(productService.getproducts().get(n).getState());
+		p.setDescription(productService.getproducts().get(n).getDescription());
+		int rating = getRatingByProduct(productService.getproducts().get(n).getId());
+		p.setRating(rating);
+		if (p.isAvailability()) {
+			p.setInventoryStatus("IN STOCK");
+			p.setInventoryName("instock");
+
+		} else {
+			p.setInventoryStatus("OUT OF STOCK");
+			p.setInventoryName("outofstock");
+		}
+		return p;
+		
+	}
 
 	public Customer addCustomer(String firstName, String lastName, String email, String login, String password)
 			throws RemoteException {
+		
 		Customer customer = new Customer(getIdCounter(), firstName, lastName, email, login, password);
 		customers.add(customer);
 		return customer;
@@ -104,21 +123,46 @@ public class BuyService {
 
 		return null;
 	}
+	
+	public Customer[] getAllCustomer() throws RemoteException{
+		return customers.toArray(new Customer[0]);
+		
+	}
 
-	public boolean buy(int customerId) throws RemoteException, MalformedURLException, NotBoundException {
-		int price = customers.get(customerId).totalPrice();
-		List<Integer> saleId = new ArrayList<Integer>();
-		for (Product p : customers.get(customerId).cart) {
-			saleId.add(saleService.getCurrentSaleByProduct(p.getId()).getId());
+	public boolean buy(int customerId, String currency) throws RemoteException, MalformedURLException, NotBoundException, ServiceException {
+		 Customer cust= null;
+		for(Customer cr: customers) {
+			if(cr.getId() == customerId) {
+				cust= cr;
+			}
 		}
-		if (withdrawal(customerId, price)) {
+		int price = cust.totalPrice();
+		Double realPrice= convert(price, currency);
+		List<Integer> saleId = new ArrayList<Integer>();
+		for (Product p : cust.cart) {
+			if(p != null)
+			  saleId.add(saleService.getCurrentSaleByProduct(p.getId()).getId());
+		}
+		if (withdrawal(customerId, realPrice)) {
 			purshaseService.addPurshaseCustomer(customerId, saleId);
-			customers.get(customerId).removeCart();
+			cust.removeCart();
 			return true;
 		} else {
 			return false;
 		}
 
+	}
+	public Product[] getCart(int customerId) {
+		for(Customer cr: customers) {
+			if(cr.getId() == customerId) {
+				if(cr.cart != null) {
+				  return cr.cart;
+				  }else {
+					  return null;
+				  }
+			}
+		}
+		return null;	
 	}
 
 	public void createBankAccount(int customerId) throws ServiceException, RemoteException {
@@ -133,11 +177,15 @@ public class BuyService {
 	public boolean withdrawal(int customerId, double amount) throws RemoteException {
 		return account.withdrawal(customerId, amount);
 	}
+	public Double balance(int customerId) throws RemoteException {
+		return account.accountBalance(customerId);
+	}
 
 	public FeedBack[] getFeedBackByProduct(int productId) throws RemoteException {
 		List<FeedBack> feed = new ArrayList<FeedBack>();
-     if(! feedBack.searchByProduct(productId).isEmpty()) {
-    	 for (IFeedBack f : feedBack.searchByProduct(productId)) {
+		List<IFeedBack> feedback= feedBack.searchByProduct(productId);
+     if(feedback != null && !feedback.isEmpty()) {
+    	 for (IFeedBack f : feedback) {
  			String str =feedBack.getEmployeeName(f.getEmployeeId());
  			FeedBack fe = new FeedBack();
  			fe.setComment(f.getComment());
@@ -166,12 +214,20 @@ public class BuyService {
 	}
 
 	public void addProductToCart(int customerId, int productId) throws RemoteException {
-
-		customers.get(customerId).addProductToCart((Product) productService.searchById(productId));
+		for(Customer cr: customers) {
+			if(cr.getId() == customerId) {
+				cr.addProductToCart(convertProduct(productId));
+			}
+		}
 	}
 
 	public void removeProductFromCart(int customerId, int productId) throws RemoteException {
-		customers.get(customerId).removeProductFromCart((Product) productService.searchById(productId));
+		for(Customer cr: customers) {
+			if(cr.getId() == customerId) {
+				cr.removeProductFromCart(convertProduct(productId));
+			}
+		}
+		
 	}
 
 	public int getIdCounter() {

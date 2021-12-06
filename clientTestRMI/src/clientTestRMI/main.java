@@ -137,6 +137,23 @@ public class main {
 	    	   System.out.println("The product "+in+" is available for employee "+emp4.getId());
 	       }
 		
+		
+		// resale other products
+		
+		ISale resal5= saleService.reSale(pursh4.getId(), 55, "Used - good condition");
+		ISale resal6= saleService.reSale(pursh5.getId(), 60, "used - like new");
+		ISale resal7= saleService.reSale(pursh6.getId(), 70, "used - like new");
+		ISale resal8= saleService.reSale(pursh7.getId(), 40, "used - like new");
+		ISale resal10= saleService.reSale(pursh8.getId(), 52, "used - like new");
+		ISale resal11= saleService.reSale(pursh10.getId(), 13, "used - like new");
+		ISale resal12= saleService.reSale(pursh11.getId(), 25, "used - like new");
+		ISale resal13= saleService.reSale(pursh12.getId(), 83, "used - like new");
+		ISale resal14= saleService.reSale(pursh13.getId(), 120, "used - like new");
+		ISale resal15= saleService.reSale(pursh14.getId(), 160, "used - like new");
+		ISale resal16= saleService.reSale(pursh15.getId(), 30, "used - like new");
+		ISale resal17= saleService.reSale(pursh16.getId(), 82, "used - like new");
+		ISale resal18= saleService.reSale(pursh17.getId(), 72, "used - like new");
+		
 	}
 
 }

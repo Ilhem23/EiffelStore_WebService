@@ -1,0 +1,142 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" template="/WEB-INF/template.xhtml">
+
+	<ui:define name="content">
+		<div class="content-section documentation">
+
+			<h:form id="form">
+				<div class="card crud-demo">
+					<p:growl id="messages" showDetail="true" />
+
+
+					<p:dataTable id="dt-products" widgetVar="dtProducts" var="product"
+						value="#{crudeView.products}" reflow="true"
+						styleClass="products-table mb-3" rowSelectMode="add">
+						<p:column headerText="Id">
+							<h:outputText value="#{product.id}" />
+						</p:column>
+						<p:column headerText="Name" exportable="false">
+							<h:outputText value="#{product.name}" />
+						</p:column>
+						<p:column headerText="Image" exportable="false">
+							<p:graphicImage name="images/product/#{product.image}"
+								library="demo" styleClass="product-image" />
+						</p:column>
+						<p:column headerText="Price" exportable="false">
+							<h:outputText value="#{product.price}" style="font-weight: 700">
+								<f:convertNumber currencySymbol="€" type="currency" />
+							</h:outputText>
+						</p:column>
+						<p:column headerText="Category" exportable="false">
+							<h:outputText value="#{product.category}" />
+						</p:column>
+						<p:column headerText="Reviews" exportable="false">
+							<p:rating value="#{product.rating}" readonly="true" />
+						</p:column>
+						<p:column headerText="Status" exportable="false">
+							<h:outputText
+								styleClass="product-badge status-#{product.inventoryStatus.replaceAll(' ','').toLowerCase()}"
+								value="#{product.inventoryStatus}" />
+						</p:column>
+						<p:column exportable="false">
+							<p:commandButton class="ui-button-warning rounded-button"
+								icon="pi pi-trash" process="@this"
+								oncomplete="PF('deleteProductDialog').show()">
+								<f:setPropertyActionListener value="#{product}"
+									target="#{crudeView.selectedProduct}" />
+							</p:commandButton>
+						</p:column>
+
+					</p:dataTable>
+					<p:divider />
+					<div class="p-grid">
+						<div class="p-col-5 p-offset-7">
+							<div class="p-grid">
+								<div class="p-col-3">
+									<h:outputText value="Total price: " style="font-weight: 700" />
+								</div>
+								<div class="p-col-2">
+									<h:outputText id="dt-price"
+										value="#{crudeView.getTotalPrice()}" style="font-weight: 700" />
+								</div>
+								<div class="p-col-1">
+									<h:outputText value="EUR"
+										style="font-weight: 700" />
+								</div>
+							</div>
+						</div>
+
+					</div>
+					<div class="p-grid">
+						<div class="p-col-5 p-offset-7">
+
+							<div class="p-grid">
+							<div class="p-col-3">
+									<h:outputText value="Choose currency: " style="font-weight: 700" />
+								</div>
+								<div class="p-col-6">
+									<p:selectOneMenu id="currency" value="#{crudeView.currency}"
+										style="width:150px">
+										<p:ajax event="valueChange"
+											listener="#{crudeView.updateCurrency}" update="dt-price-curr,dt-curr" />
+										<!-- 
+										<f:selectItem itemLabel="Select Currency" itemValue=""
+											noSelectionOption="true" />
+											 -->
+										<f:selectItems value="#{crudeView.getAllCurrency()}" />
+									</p:selectOneMenu>
+								</div>
+								
+							</div>
+						</div>
+					</div>
+					<div class="p-grid">
+						<div class="p-col-5 p-offset-7">
+							<div class="p-grid">
+								<div class="p-col-3">
+									<h:outputText value="Price after: " style="font-weight: 700" />
+								</div>
+								<div class="p-col-2">
+									<h:outputText id="dt-price-curr"
+										value="#{crudeView.totaleCurrencyPrice}" style="font-weight: 700" />
+								</div>
+								<div class="p-col-1">
+									<h:outputText id="dt-curr" value="#{crudeView.currency}"
+										style="font-weight: 700" />
+								</div>
+							</div>
+						</div>
+
+					</div>
+
+					<div class="p-grid">
+						<div class="p-col-4 p-offset-8">
+							<p:commandButton value="Payment" process="@this" action="#{crudeView.payment()}" />
+						</div>
+					</div>
+					<p:confirmDialog widgetVar="deleteProductDialog" showEffect="fade"
+						width="300" message="Delete the product?" header="Confirm"
+						severity="warn">
+						<p:commandButton value="Yes" icon="pi pi-check"
+							actionListener="#{crudeView.deleteProduct}" process="@this"
+							oncomplete="PF('deleteProductDialog').hide()" />
+						<p:commandButton value="No" type="button"
+							styleClass="ui-button-secondary" icon="pi pi-times"
+							onclick="PF('deleteProductDialog').hide()" />
+					</p:confirmDialog>
+
+					<p:confirmDialog global="true" showEffect="fade" width="300">
+						<p:commandButton value="Yes" type="button"
+							styleClass="ui-confirmdialog-yes" icon="pi pi-check" />
+						<p:commandButton value="No" type="button"
+							styleClass="ui-confirmdialog-no ui-button-secondary"
+							icon="pi pi-times" />
+					</p:confirmDialog>
+				</div>
+			</h:form>
+		</div>
+	</ui:define>
+</ui:composition>

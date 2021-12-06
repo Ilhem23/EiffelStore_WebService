@@ -7,8 +7,8 @@
   <ns1:parameter name="dotNetSoapEncFix" value="true"/>
   <ns1:parameter name="enableNamespacePrefixOptimization" value="false"/>
   <ns1:parameter name="sendXMLDeclaration" value="true"/>
-  <ns1:parameter name="attachments.implementation" value="org.apache.axis.attachments.AttachmentsImpl"/>
   <ns1:parameter name="sendXsiTypes" value="true"/>
+  <ns1:parameter name="attachments.implementation" value="org.apache.axis.attachments.AttachmentsImpl"/>
   <ns1:requestFlow>
    <ns1:handler type="java:org.apache.axis.handlers.JWSHandler">
     <ns1:parameter name="scope" value="session"/>
@@ -37,51 +37,63 @@
    <ns2:parameter qname="ns1:montant" type="xsd:double"/>
    <ns2:parameter qname="ns1:currency" type="xsd:string"/>
   </ns2:operation>
-  <ns1:operation name="getNameEmployee" qname="ns2:getNameEmployee" returnQName="ns2:getNameEmployeeReturn" returnType="xsd:string" soapAction="" xmlns:ns2="http://entity" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-   <ns1:parameter qname="ns2:id" type="xsd:int"/>
+  <ns1:operation name="balance" qname="ns2:balance" returnQName="ns2:balanceReturn" returnType="xsd:double" soapAction="" xmlns:ns2="http://entity" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+   <ns1:parameter qname="ns2:customerId" type="xsd:int"/>
   </ns1:operation>
-  <ns1:operation name="addProductToCart" qname="ns3:addProductToCart" soapAction="" xmlns:ns3="http://entity">
-   <ns1:parameter qname="ns3:customerId" type="xsd:int" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
-   <ns1:parameter qname="ns3:productId" type="xsd:int" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+  <ns1:operation name="getRatingByProduct" qname="ns3:getRatingByProduct" returnQName="ns3:getRatingByProductReturn" returnType="xsd:int" soapAction="" xmlns:ns3="http://entity" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+   <ns1:parameter qname="ns3:productId" type="xsd:int"/>
   </ns1:operation>
-  <ns1:operation name="addCustomer" qname="ns4:addCustomer" returnQName="ns4:addCustomerReturn" returnType="ns4:Customer" soapAction="" xmlns:ns4="http://entity">
-   <ns1:parameter qname="ns4:firstName" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
-   <ns1:parameter qname="ns4:lastName" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
-   <ns1:parameter qname="ns4:email" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
-   <ns1:parameter qname="ns4:login" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
-   <ns1:parameter qname="ns4:password" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+  <ns1:operation name="getFeedBackByProduct" qname="ns4:getFeedBackByProduct" returnQName="ns4:getFeedBackByProductReturn" returnType="ns4:FeedBack" soapAction="" xmlns:ns4="http://entity">
+   <ns1:parameter qname="ns4:productId" type="xsd:int" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
   </ns1:operation>
-  <ns1:operation name="loginCustomer" qname="ns5:loginCustomer" returnQName="ns5:loginCustomerReturn" returnType="ns5:Customer" soapAction="" xmlns:ns5="http://entity">
-   <ns1:parameter qname="ns5:login" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
-   <ns1:parameter qname="ns5:password" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+  <ns1:operation name="createBankAccount" qname="ns5:createBankAccount" soapAction="" xmlns:ns5="http://entity">
+   <ns1:parameter qname="ns5:customerId" type="xsd:int" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
   </ns1:operation>
-  <ns1:operation name="getAllCurencies" qname="ns6:getAllCurencies" returnQName="ns6:getAllCurenciesReturn" returnType="xsd:string" soapAction="" xmlns:ns6="http://entity" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
-  <ns1:operation name="buy" qname="ns7:buy" returnQName="ns7:buyReturn" returnType="xsd:boolean" soapAction="" xmlns:ns7="http://entity" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-   <ns1:parameter qname="ns7:customerId" type="xsd:int"/>
+  <ns1:operation name="removeProductFromCart" qname="ns6:removeProductFromCart" soapAction="" xmlns:ns6="http://entity">
+   <ns1:parameter qname="ns6:customerId" type="xsd:int" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+   <ns1:parameter qname="ns6:productId" type="xsd:int" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
   </ns1:operation>
-  <ns1:operation name="getProductList" qname="ns8:getProductList" returnQName="ns8:getProductListReturn" returnType="ns8:Product" soapAction="" xmlns:ns8="http://entity"/>
-  <ns1:operation name="deposit" qname="ns9:deposit" soapAction="" xmlns:ns9="http://entity">
-   <ns1:parameter qname="ns9:customerId" type="xsd:int" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
-   <ns1:parameter qname="ns9:amount" type="xsd:double" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+  <ns1:operation name="getAllCurencies" qname="ns7:getAllCurencies" returnQName="ns7:getAllCurenciesReturn" returnType="xsd:string" soapAction="" xmlns:ns7="http://entity" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+  <ns1:operation name="convertProduct" qname="ns8:convertProduct" returnQName="ns8:convertProductReturn" returnType="ns8:Product" soapAction="" xmlns:ns8="http://entity">
+   <ns1:parameter qname="ns8:n" type="xsd:int" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
   </ns1:operation>
-  <ns1:operation name="withdrawal" qname="ns10:withdrawal" returnQName="ns10:withdrawalReturn" returnType="xsd:boolean" soapAction="" xmlns:ns10="http://entity" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-   <ns1:parameter qname="ns10:customerId" type="xsd:int"/>
-   <ns1:parameter qname="ns10:amount" type="xsd:double"/>
+  <ns1:operation name="getProductList" qname="ns9:getProductList" returnQName="ns9:getProductListReturn" returnType="ns9:Product" soapAction="" xmlns:ns9="http://entity"/>
+  <ns1:operation name="getAllCustomer" qname="ns10:getAllCustomer" returnQName="ns10:getAllCustomerReturn" returnType="ns10:Customer" soapAction="" xmlns:ns10="http://entity"/>
+  <ns1:operation name="getIdCounter" qname="ns11:getIdCounter" returnQName="ns11:getIdCounterReturn" returnType="xsd:int" soapAction="" xmlns:ns11="http://entity" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+  <ns1:operation name="buy" qname="ns12:buy" returnQName="ns12:buyReturn" returnType="xsd:boolean" soapAction="" xmlns:ns12="http://entity" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+   <ns1:parameter qname="ns12:customerId" type="xsd:int"/>
+   <ns1:parameter qname="ns12:currency" type="xsd:string"/>
   </ns1:operation>
-  <ns1:operation name="getRatingByProduct" qname="ns11:getRatingByProduct" returnQName="ns11:getRatingByProductReturn" returnType="xsd:int" soapAction="" xmlns:ns11="http://entity" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-   <ns1:parameter qname="ns11:productId" type="xsd:int"/>
+  <ns1:operation name="getNameEmployee" qname="ns13:getNameEmployee" returnQName="ns13:getNameEmployeeReturn" returnType="xsd:string" soapAction="" xmlns:ns13="http://entity" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+   <ns1:parameter qname="ns13:id" type="xsd:int"/>
   </ns1:operation>
-  <ns1:operation name="createBankAccount" qname="ns12:createBankAccount" soapAction="" xmlns:ns12="http://entity">
-   <ns1:parameter qname="ns12:customerId" type="xsd:int" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+  <ns1:operation name="loginCustomer" qname="ns14:loginCustomer" returnQName="ns14:loginCustomerReturn" returnType="ns14:Customer" soapAction="" xmlns:ns14="http://entity">
+   <ns1:parameter qname="ns14:login" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+   <ns1:parameter qname="ns14:password" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
   </ns1:operation>
-  <ns1:operation name="removeProductFromCart" qname="ns13:removeProductFromCart" soapAction="" xmlns:ns13="http://entity">
-   <ns1:parameter qname="ns13:customerId" type="xsd:int" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
-   <ns1:parameter qname="ns13:productId" type="xsd:int" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+  <ns1:operation name="withdrawal" qname="ns15:withdrawal" returnQName="ns15:withdrawalReturn" returnType="xsd:boolean" soapAction="" xmlns:ns15="http://entity" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+   <ns1:parameter qname="ns15:customerId" type="xsd:int"/>
+   <ns1:parameter qname="ns15:amount" type="xsd:double"/>
   </ns1:operation>
-  <ns1:operation name="getFeedBackByProduct" qname="ns14:getFeedBackByProduct" returnQName="ns14:getFeedBackByProductReturn" returnType="ns14:FeedBack" soapAction="" xmlns:ns14="http://entity">
-   <ns1:parameter qname="ns14:productId" type="xsd:int" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+  <ns1:operation name="addCustomer" qname="ns16:addCustomer" returnQName="ns16:addCustomerReturn" returnType="ns16:Customer" soapAction="" xmlns:ns16="http://entity">
+   <ns1:parameter qname="ns16:firstName" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+   <ns1:parameter qname="ns16:lastName" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+   <ns1:parameter qname="ns16:email" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+   <ns1:parameter qname="ns16:login" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+   <ns1:parameter qname="ns16:password" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
   </ns1:operation>
-  <ns1:parameter name="allowedMethods" value="removeProductFromCart getRatingByProduct createBankAccount buy getFeedBackByProduct convert withdrawal addProductToCart addCustomer loginCustomer deposit getAllCurencies getProductList getNameEmployee"/>
+  <ns1:operation name="getCart" qname="ns17:getCart" returnQName="ns17:getCartReturn" returnType="ns17:Product" soapAction="" xmlns:ns17="http://entity">
+   <ns1:parameter qname="ns17:customerId" type="xsd:int" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+  </ns1:operation>
+  <ns1:operation name="addProductToCart" qname="ns18:addProductToCart" soapAction="" xmlns:ns18="http://entity">
+   <ns1:parameter qname="ns18:customerId" type="xsd:int" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+   <ns1:parameter qname="ns18:productId" type="xsd:int" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+  </ns1:operation>
+  <ns1:operation name="deposit" qname="ns19:deposit" soapAction="" xmlns:ns19="http://entity">
+   <ns1:parameter qname="ns19:customerId" type="xsd:int" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+   <ns1:parameter qname="ns19:amount" type="xsd:double" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+  </ns1:operation>
+  <ns1:parameter name="allowedMethods" value="removeProductFromCart getRatingByProduct createBankAccount buy getFeedBackByProduct convertProduct convert withdrawal getCart addProductToCart getIdCounter addCustomer loginCustomer balance deposit getAllCurencies getProductList getAllCustomer getNameEmployee"/>
   <ns1:parameter name="typeMappingVersion" value="1.2"/>
   <ns1:parameter name="wsdlPortType" value="BuyService"/>
   <ns1:parameter name="className" value="entity.BuyService"/>
@@ -89,10 +101,10 @@
   <ns1:parameter name="schemaQualified" value="http://entity"/>
   <ns1:parameter name="wsdlTargetNamespace" value="http://entity"/>
   <ns1:parameter name="wsdlServiceElement" value="BuyServiceService"/>
-  <ns1:typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="" qname="ns15:Customer" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:entity.Customer" xmlns:ns15="http://entity"/>
-  <ns1:typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="" qname="ns16:Product" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:entity.Product" xmlns:ns16="http://entity"/>
-  <ns1:typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="" qname="ns17:FeedBack" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:entity.FeedBack" xmlns:ns17="http://entity"/>
-  <ns1:arrayMapping innerType="ns18:Product" languageSpecificType="java:entity.Product[]" qname="ns18:ArrayOfProduct" xmlns:ns18="http://entity"/>
+  <ns1:typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="" qname="ns20:Customer" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:entity.Customer" xmlns:ns20="http://entity"/>
+  <ns1:typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="" qname="ns21:Product" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:entity.Product" xmlns:ns21="http://entity"/>
+  <ns1:typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="" qname="ns22:FeedBack" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:entity.FeedBack" xmlns:ns22="http://entity"/>
+  <ns1:arrayMapping innerType="ns23:Product" languageSpecificType="java:entity.Product[]" qname="ns23:ArrayOfProduct" xmlns:ns23="http://entity"/>
  </ns1:service>
  <ns1:transport name="http">
   <ns1:requestFlow>

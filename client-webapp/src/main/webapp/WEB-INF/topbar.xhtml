@@ -1,0 +1,21 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui">
+
+   
+    
+    <div class="layout-topbar p-grid">
+    <div class="p-col-4"><a class="menu-button" tabindex="0">
+            <i class="pi pi-bars"></i>
+        </a>
+        <h:link styleClass="logo" outcome="/ui/client/store.xhtml">
+            <p:graphicImage name="images/logo_eiffel.png" library="showcase" />
+        </h:link></div>
+        
+    <div class="p-col-1 p-offset-7"><h:form>
+       
+         <p:commandButton value="Logout" icon="pi pi-fw pi-sign-out" styleClass="ui-button-info" action="#{loginView.logout}"/>
+   
+       </h:form>
+       </div>
+     </div>
+</ui:composition>

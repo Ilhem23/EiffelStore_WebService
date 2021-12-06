@@ -19,6 +19,17 @@ public class Customer implements Serializable, ICustomer{
 	public Product[] productSale;
 	public Product[] cart;
 	private int indexSale;
+	public Product[] getCart() {
+		return cart;
+	}
+
+	public void setCart(Product[] cart) {
+		this.cart = cart;
+	}
+
+	public void setProductSale(Product[] productSale) {
+		this.productSale = productSale;
+	}
 	private int indexCart;
 	
 	public Customer(int id, String firstName, String lastName, String email, String login, String password) throws RemoteException {
@@ -29,7 +40,6 @@ public class Customer implements Serializable, ICustomer{
 		this.email= email;
 		this.login= login;
 		this.password= password;
-		productSale= new Product[200];
 		indexSale= 0;
 		indexCart= 0;
 		
@@ -81,8 +91,14 @@ public class Customer implements Serializable, ICustomer{
 	}
 
 	public void AddProductSale(Product productSales) {
-		
-		productSale[indexSale]= productSales;
+		productSale= new Product[20];
+		if(productSale != null)
+		{
+			productSale[indexSale]= productSales;
+		}else {
+			productSale= new Product[20];
+			productSale[indexSale]= productSales;
+		}
 		indexSale++;
 		
 	}
@@ -92,30 +108,39 @@ public class Customer implements Serializable, ICustomer{
 		{
 			cart[indexCart]= product;
 		}else {
-			cart= new Product[200];
+			cart= new Product[20];
 			cart[indexCart]= product;
 		}
 		indexCart++;
 		
 	}
 	public void removeProductFromCart(Product product) {
-		for(int i=0; i< cart.length;i++) {
-			if(cart[i].getId()== product.getId())
-			{
-				cart[i]= null;
+		int n= 0;
+		for(Product p : cart) {
+			if(p != null) {
+				if(p.getId() == product.getId()) {
+					cart[n] = null;
+				}
 			}
+			
+			n++;
 		}
 	}
 	public int totalPrice() throws RemoteException {
 		int total= 0;
-		for(Product p: cart) {
-			total= total+ p.getPrice();
-			
+		if(cart != null)
+		{
+		for(Product p : cart)
+		{
+			if(p != null)
+				total= total+ p.getPrice();
+		}	
 		}
 		return total;
+	
 	}
 	public void removeCart() {
-		cart= new Product[200];
+		cart= new Product[20];
 	}
 
 

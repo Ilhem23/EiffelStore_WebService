@@ -122,6 +122,7 @@ public class PurshaseService extends UnicastRemoteObject implements IPurshaseCon
 		{
 			int id= saleService.getSaleById(i).getProductId();
 			products.add(productService.searchById(id));
+			productService.searchById(id).setAvailability(false);
 			IPurshase purshase= new Purshase();
 			purshase.setCustomerId(customerId);
 			purshase.setId(getIdCounter());
