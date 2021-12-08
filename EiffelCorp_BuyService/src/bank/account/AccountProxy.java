@@ -50,22 +50,22 @@ public class AccountProxy implements bank.account.Account {
     account.createAccount(idCustomer);
   }
   
-  public void deposit(int idClient, double amount) throws java.rmi.RemoteException{
+  public boolean withdrawal(int idCustomer, double amount) throws java.rmi.RemoteException{
     if (account == null)
       _initAccountProxy();
-    account.deposit(idClient, amount);
+    return account.withdrawal(idCustomer, amount);
   }
   
-  public boolean withdrawal(int idClient, double amount) throws java.rmi.RemoteException{
+  public void deposit(int idCustomer, double amount) throws java.rmi.RemoteException{
     if (account == null)
       _initAccountProxy();
-    return account.withdrawal(idClient, amount);
+    account.deposit(idCustomer, amount);
   }
   
-  public double accountBalance(int idClient) throws java.rmi.RemoteException{
+  public double accountBalance(int idCustomer) throws java.rmi.RemoteException{
     if (account == null)
       _initAccountProxy();
-    return account.accountBalance(idClient);
+    return account.accountBalance(idCustomer);
   }
   
   

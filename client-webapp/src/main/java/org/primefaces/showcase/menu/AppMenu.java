@@ -47,7 +47,8 @@ public class AppMenu {
         List<MenuItem> clientMenuItems = new ArrayList<>();
         clientMenuItems.add(new MenuItem("Store", "/ui/client/store"));
         clientMenuItems.add(new MenuItem("My Shopping cart", "/ui/client/mycart"));
-  
+        clientMenuItems.add(new MenuItem("deposit money", "/ui/client/deposit"));
+        clientMenuItems.add(new MenuItem("My Orders", "/ui/client/myorders"));
         menuCategories.add(new MenuCategory("Client Web App", clientMenuItems));
 
 

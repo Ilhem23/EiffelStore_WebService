@@ -9,7 +9,7 @@ package bank.account;
 
 public interface Account extends java.rmi.Remote {
     public void createAccount(int idCustomer) throws java.rmi.RemoteException;
-    public void deposit(int idClient, double amount) throws java.rmi.RemoteException;
-    public boolean withdrawal(int idClient, double amount) throws java.rmi.RemoteException;
-    public double accountBalance(int idClient) throws java.rmi.RemoteException;
+    public boolean withdrawal(int idCustomer, double amount) throws java.rmi.RemoteException;
+    public void deposit(int idCustomer, double amount) throws java.rmi.RemoteException;
+    public double accountBalance(int idCustomer) throws java.rmi.RemoteException;
 }

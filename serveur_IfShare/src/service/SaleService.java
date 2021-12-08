@@ -102,8 +102,16 @@ public class SaleService extends UnicastRemoteObject implements ISaleController{
 
 	@Override
 	public List<ISale> getSalesByEmployee(int employeeId) throws RemoteException {
-		// TODO Auto-generated method stub
-		return null;
+		List<ISale> sales= new ArrayList<>();
+		for(ISale p: productSale.values()) {
+			if(p != null) {
+				if(p.getEmployeeId() == employeeId) {
+					sales.add(p);
+				}
+			}
+			
+		}
+		return sales;
 	}
 
 	@Override

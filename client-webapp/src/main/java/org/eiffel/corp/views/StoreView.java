@@ -53,11 +53,19 @@ public class StoreView implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private List<Product> products;
     private Product selectedProduct;
+    private Double amount;
 
-    @Inject
+    public Double getAmount() {
+		return amount;
+	}
+
+	public void setAmount(Double amount) {
+		this.amount = amount;
+	}
+
+	@Inject
     private StoreService service;
-
-  
+	
 
 	@PostConstruct
     public void init() {
@@ -67,12 +75,26 @@ public class StoreView implements Serializable {
    public List<FeedBack> getFeed(){
 	   return service.getFeedBack(selectedProduct.getId());
    }
+   public List<Product> getSales(){
+	   
+	   return service.getSales();
+	   
+   }
     public List<Product> getProducts() {
         return products;
     }
 
     public void setService(StoreService service) {
         this.service = service;
+    }
+    public String getBalance() {
+    	return service.getBalance();
+    }
+    public void deposit() {
+    	service.deposit(amount);
+    	FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Money Added"));
+        PrimeFaces.current().ajax().update("formD:messageMoney");
+        PrimeFaces.current().ajax().update("fbadge");
     }
 
     public Product getSelectedProduct() {

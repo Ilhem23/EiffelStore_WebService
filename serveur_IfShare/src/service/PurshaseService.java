@@ -72,8 +72,16 @@ public class PurshaseService extends UnicastRemoteObject implements IPurshaseCon
 
 	@Override
 	public List<IPurshase> getPurshaseByEmployee(int employeeId) throws RemoteException {
-		// TODO Auto-generated method stub
-		return null;
+		List<IPurshase> purchases= new ArrayList<>();
+		for(IPurshase p: purshases.values()) {
+			if(p != null) {
+				if(p.getEmployeeId() == employeeId) {
+					purchases.add(p);
+				}
+			}
+			
+		}
+		return purchases;
 	}
 
 	@Override

@@ -23,11 +23,11 @@
       <operation name="createAccount" qname="operNS:createAccount" xmlns:operNS="http://account.bank" soapAction="" >
         <parameter qname="pns:idCustomer" xmlns:pns="http://account.bank" type="tns:int" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
       </operation>
-      <operation name="deposit" qname="operNS:deposit" xmlns:operNS="http://account.bank" soapAction="" >
+      <operation name="withdrawal" qname="operNS:withdrawal" xmlns:operNS="http://account.bank" returnQName="retNS:withdrawalReturn" xmlns:retNS="http://account.bank" returnType="rtns:boolean" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
         <parameter qname="pns:idCustomer" xmlns:pns="http://account.bank" type="tns:int" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
         <parameter qname="pns:amount" xmlns:pns="http://account.bank" type="tns:double" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
       </operation>
-      <operation name="withdrawal" qname="operNS:withdrawal" xmlns:operNS="http://account.bank" returnQName="retNS:withdrawalReturn" xmlns:retNS="http://account.bank" returnType="rtns:boolean" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+      <operation name="deposit" qname="operNS:deposit" xmlns:operNS="http://account.bank" soapAction="" >
         <parameter qname="pns:idCustomer" xmlns:pns="http://account.bank" type="tns:int" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
         <parameter qname="pns:amount" xmlns:pns="http://account.bank" type="tns:double" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
       </operation>

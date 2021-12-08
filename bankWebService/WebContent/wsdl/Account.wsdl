@@ -14,17 +14,6 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
    <element name="createAccountResponse">
     <complexType/>
    </element>
-   <element name="deposit">
-    <complexType>
-     <sequence>
-      <element name="idCustomer" type="xsd:int"/>
-      <element name="amount" type="xsd:double"/>
-     </sequence>
-    </complexType>
-   </element>
-   <element name="depositResponse">
-    <complexType/>
-   </element>
    <element name="withdrawal">
     <complexType>
      <sequence>
@@ -39,6 +28,17 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
       <element name="withdrawalReturn" type="xsd:boolean"/>
      </sequence>
     </complexType>
+   </element>
+   <element name="deposit">
+    <complexType>
+     <sequence>
+      <element name="idCustomer" type="xsd:int"/>
+      <element name="amount" type="xsd:double"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="depositResponse">
+    <complexType/>
    </element>
    <element name="accountBalance">
     <complexType>
@@ -81,14 +81,6 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
 
    </wsdl:message>
 
-   <wsdl:message name="depositResponse">
-
-      <wsdl:part element="impl:depositResponse" name="parameters">
-
-      </wsdl:part>
-
-   </wsdl:message>
-
    <wsdl:message name="withdrawalRequest">
 
       <wsdl:part element="impl:withdrawal" name="parameters">
@@ -100,6 +92,14 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
    <wsdl:message name="withdrawalResponse">
 
       <wsdl:part element="impl:withdrawalResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="depositResponse">
+
+      <wsdl:part element="impl:depositResponse" name="parameters">
 
       </wsdl:part>
 
@@ -135,18 +135,6 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
 
       </wsdl:operation>
 
-      <wsdl:operation name="deposit">
-
-         <wsdl:input message="impl:depositRequest" name="depositRequest">
-
-       </wsdl:input>
-
-         <wsdl:output message="impl:depositResponse" name="depositResponse">
-
-       </wsdl:output>
-
-      </wsdl:operation>
-
       <wsdl:operation name="withdrawal">
 
          <wsdl:input message="impl:withdrawalRequest" name="withdrawalRequest">
@@ -154,6 +142,18 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
        </wsdl:input>
 
          <wsdl:output message="impl:withdrawalResponse" name="withdrawalResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="deposit">
+
+         <wsdl:input message="impl:depositRequest" name="depositRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:depositResponse" name="depositResponse">
 
        </wsdl:output>
 
@@ -195,24 +195,6 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
 
       </wsdl:operation>
 
-      <wsdl:operation name="deposit">
-
-         <wsdlsoap:operation soapAction=""/>
-
-         <wsdl:input name="depositRequest">
-
-            <wsdlsoap:body use="literal"/>
-
-         </wsdl:input>
-
-         <wsdl:output name="depositResponse">
-
-            <wsdlsoap:body use="literal"/>
-
-         </wsdl:output>
-
-      </wsdl:operation>
-
       <wsdl:operation name="withdrawal">
 
          <wsdlsoap:operation soapAction=""/>
@@ -224,6 +206,24 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
          </wsdl:input>
 
          <wsdl:output name="withdrawalResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="deposit">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="depositRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="depositResponse">
 
             <wsdlsoap:body use="literal"/>
 

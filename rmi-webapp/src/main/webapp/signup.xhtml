@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+	<title>Sing Up Page</title>
+	<link type="text/css"
+		href="${facesContext.externalContext.requestContextPath}/resources/css/style.css"
+		rel="stylesheet" />
+	<link type="image/x-icon"
+		href="${facesContext.externalContext.requestContextPath}/resources/images/favicon.ico"
+		rel="shortcut icon" />
+</h:head>
+
+<h:body>
+	<div class="card">
+		<h:form id="singupForm">
+			<p:growl id="msg" showDetail="true" life="4000" />
+			<p:panel id="singupPnl" header="Signup"
+				style="width: 650px; margin: 0 auto;">
+				<h:panelGrid id="singupPanel" columns="2" cellpadding="5">
+					<h:outputText value="Firstname: *" />
+					<p:inputText id="firstname" value="#{signupView.firstname}" required="true"	requiredMessage="Please enter your firstname."/>
+					<p:spacer />
+					<p:spacer />
+
+					<h:outputText value="Lastname: *" />
+					<p:inputText id="lastname" value="#{signupView.lastname}" required="true" requiredMessage="Please enter your lastname."/>
+					<p:spacer />
+					<p:spacer />
+
+					<h:outputText value="Email: *" />
+					<p:inputText id="email" value="#{signupView.email}" required="true"
+							requiredMessage="Please enter your email address."
+							validatorMessage="Invalid email format">
+						<f:validateRegex pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+					</p:inputText>
+					<p:spacer />
+					<p:spacer />
+
+					<h:outputText value="Username: *" />
+					<p:inputText id="username" value="#{signupView.username}" required="true" requiredMessage="Please enter a username."></p:inputText>
+					<p:spacer />
+					<p:spacer />
+
+					<h:outputText value="Password: *" />
+					<p:password id="pwd1" value="#{signupView.password}" match="pwd2" label="Password" required="true" requiredMessage="Please enter a password."/>
+					<p:spacer />
+					<p:spacer />
+
+					<h:outputText value="Confirm password: *" />
+					<p:password id="pwd2" value="#{signupView.password}" label="Confirmation" required="true" requiredMessage="Please enter password confirmation."/>
+					<p:spacer />
+					<p:spacer />
+
+				</h:panelGrid>
+				<h:panelGrid columns="1" cellpadding="10" width="100%">
+					<p:commandButton id="singupButton"
+						action="#{signupView.validateSignUp}" value="Signup"
+						update="singupForm" ajax="true" style="float: right;">
+					</p:commandButton>
+				</h:panelGrid>
+			</p:panel>
+			<p:messages id="messages" showDetail="false">
+				<p:autoUpdate />
+			</p:messages>			
+			<p:blockUI block="singupPnl" trigger="singupButton"
+				style="float:right;">
+				<p:graphicImage value="resources/images/loader.gif" />
+			</p:blockUI>
+		</h:form>
+	</div>
+
+</h:body>
+</html>

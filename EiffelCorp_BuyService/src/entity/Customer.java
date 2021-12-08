@@ -91,7 +91,7 @@ public class Customer implements Serializable, ICustomer{
 	}
 
 	public void AddProductSale(Product productSales) {
-		productSale= new Product[20];
+		
 		if(productSale != null)
 		{
 			productSale[indexSale]= productSales;

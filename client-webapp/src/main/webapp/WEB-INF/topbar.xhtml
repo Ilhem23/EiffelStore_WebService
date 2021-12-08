@@ -10,9 +10,16 @@
         <h:link styleClass="logo" outcome="/ui/client/store.xhtml">
             <p:graphicImage name="images/logo_eiffel.png" library="showcase" />
         </h:link></div>
-        
-    <div class="p-col-1 p-offset-7"><h:form>
+        <div class="p-col-1 p-offset-6"><h:form id="fbadge">
+          <p:badge value="#{storeView.getBalance()}+" severity="danger">
+              <i class="pi pi-money-bill p-ml-4" style="font-size: 2rem"/>
+           </p:badge>
        
+       </h:form>
+       </div>
+        
+    <div class="p-col-1"><h:form>
+         
          <p:commandButton value="Logout" icon="pi pi-fw pi-sign-out" styleClass="ui-button-info" action="#{loginView.logout}"/>
    
        </h:form>

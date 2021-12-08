@@ -1,0 +1,55 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" template="/WEB-INF/template.xhtml">
+
+	<ui:define name="content">
+		<div class="content-section documentation">
+
+			<h:form id="formD">
+				<div class="card crud-demo">
+					<p:growl id="messageMoney" showDetail="true" />
+
+					<div class="p-grid">
+
+						<div class="p-col-6 p-offset-5">
+							<div class="box">
+								
+									<p:graphicImage name="images/product/bank2.png" library="demo"
+										styleClass="product-image" />
+								
+							
+								
+							</div>
+						</div>
+						<p:spacer /><p:spacer />
+						
+						<div class="p-col-6 p-offset-5">
+								<h:outputText value="Deposit money" style="font-weight: 500" />
+							
+						</div>
+						<p:spacer /><p:spacer />
+						<div class="p-col-5 p-offset-5">
+                             <p:inputNumber id="amount" update="formD" ajax="true" value="#{storeView.amount}" decimalPlaces="2" />		
+							
+						</div>
+						
+						<p:spacer /><p:spacer />
+						<div class="p-col-5 p-offset-5">
+                            <p:commandButton value="deposit" icon="pi pi-check"
+							action="#{storeView.deposit}" process="@all"
+							 />		
+							
+						</div>
+
+					</div>
+
+
+
+
+				</div>
+			</h:form>
+		</div>
+	</ui:define>
+</ui:composition>

@@ -106,7 +106,10 @@ public class ProductService extends UnicastRemoteObject implements IProductContr
 
 	@Override
 	public Map<Integer, IProduct> getproducts() throws RemoteException {
+		
+		
 		return productList;
+		
 	}
 
 	@Override

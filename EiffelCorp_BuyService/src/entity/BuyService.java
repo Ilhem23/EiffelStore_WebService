@@ -145,6 +145,11 @@ public class BuyService {
 		}
 		if (withdrawal(customerId, realPrice)) {
 			purshaseService.addPurshaseCustomer(customerId, saleId);
+			for (Product p : cust.cart) {
+				if(p != null)
+					cust.AddProductSale(p);
+			}
+			
 			cust.removeCart();
 			return true;
 		} else {
